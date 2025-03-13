@@ -1,14 +1,18 @@
 import torch 
+import numpy as np
 from torch import Tensor
 
-def lightpos2angle(positions: Tensor) -> Tensor: 
+def lightpos2angle(positions: list | tuple | np.ndarray | Tensor) -> Tensor: 
     """
     Given a light position, returns unit vector from that position to (0,0,0). 
     Args: 
-        positions (Tensor): [N, 3] or [3]
+        positions (ArrayLike): [N, 3] or [3]
     Returns:
         angle (Tensor): [N,3] or [3]
     """
+    if not isinstance(positions, torch.Tensor): 
+        positions = torch.Tensor(positions)
+        
     if positions.ndim == 1:
         positions = positions.unsqueeze(0)  # Add a batch dimension if it's a single point
 
