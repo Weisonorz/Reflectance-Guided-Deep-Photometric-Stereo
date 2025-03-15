@@ -5,6 +5,10 @@ paths:
   info_json_path: "/data2/datasets/ruoguli/idl_project_datas/generated_dataset/info_dataset.json" 
   latent_vectors_dir: "/data2/datasets/ruoguli/idl_project_datas/latent_vectors"
   checkpoint_dir: "/data2/datasets/ruoguli/idl_project_datas/checkpoints"
-
+dataset:
+  random_crop_size: null
+  normalize: "PixelNormalize" 
 train: 
   batch_size: 1024 
+eval:
+  model: "PS_FCN" 
