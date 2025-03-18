@@ -8,7 +8,10 @@ paths:
 dataset:
   random_crop_size: null
   normalize: "PixelNormalize" 
+  random_seed: 42
+  val_split: 0.2
 train: 
-  batch_size: 1024 
+  batch_size: 1
 eval:
   model: "PS_FCN" 
+device: "cuda"

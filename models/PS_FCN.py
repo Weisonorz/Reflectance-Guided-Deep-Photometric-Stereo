@@ -56,7 +56,7 @@ class Regressor(nn.Module):
         return normal
 
 class PS_FCN(nn.Module):
-    def __init__(self, fuse_type='max', batchNorm=False, c_in=3, other={}):
+    def __init__(self, fuse_type='max', batchNorm=False, c_in=6, other={}):
         super(PS_FCN, self).__init__()
         self.extractor = FeatExtractor(batchNorm, c_in, other)
         self.regressor = Regressor(batchNorm, other)
