@@ -9,18 +9,15 @@ device="cuda" if torch.cuda.is_available() else "cpu"
 batch_size = 10
 height = 128
 width = 128
-c_in_new = 3
+image_channel = 3
 
 # Random input data (batch of 4 images with 3 channels)
-img_input = torch.rand(batch_size, c_in_new, height, width)
-
-# Random lighting input (optional)
-light_input = torch.rand(batch_size, c_in_new, height, width)
-
+img_input = torch.rand(batch_size, image_channel*10, height, width)
+light_input = torch.rand(batch_size, image_channel*10, height, width)
 brdf = torch.rand(14,)
 
 # Initialize the model
-model = PS_FCN_feature1.PS_FCN_CBN(batch_size, fuse_type='max', batchNorm=True, c_in=c_in_new).to(device)
+model = PS_FCN_feature1.PS_FCN_CBN(batch_size, fuse_type='max', batchNorm=True, c_in=image_channel).to(device)
 
 # Model summary
 summary(model, 

@@ -24,7 +24,7 @@ class BRDF_EmbedBlock(nn.Module):
         return x
 
 class Conditional_Conv(nn.Module):
-    def __init__(self, cin, cout, batch_size, brdf_embed_size=512, k=3, stride=1, pad=-1):
+    def __init__(self, cin, cout, batch_size, brdf_embed_size, k=3, stride=1, pad=-1):
         super(Conditional_Conv, self).__init__()
 
         self.regular_conv = nn.Conv2d(cin, cout, kernel_size=k, stride=stride, padding=pad, bias=False)
@@ -45,7 +45,7 @@ class FeatExtractor_CBN(nn.Module):
     '''
     Remember to pass in batch_size, height, width
     '''
-    def __init__(self, batch_size, c_in=6, batchNorm=False, other={}, brdf_embed_size=512):
+    def __init__(self, batch_size, c_in, batchNorm=False, other={}, brdf_embed_size=512):
         
         super(FeatExtractor_CBN, self).__init__()
 
@@ -53,11 +53,11 @@ class FeatExtractor_CBN(nn.Module):
         self.other = other
 
         # downsampling
-        self.conv1 = Conditional_Conv(c_in, 64, batch_size, brdf_embed_size=brdf_embed_size, k=3, stride=1, pad=1)
-        self.conv2 = Conditional_Conv(64, 128, batch_size, brdf_embed_size=brdf_embed_size, k=3, stride=2, pad=1)
-        self.conv3 = Conditional_Conv(128, 128, batch_size, brdf_embed_size=brdf_embed_size, k=3, stride=1, pad=1)
-        self.conv4 = Conditional_Conv(128,  256, batch_size, brdf_embed_size=brdf_embed_size, k=3, stride=2, pad=1)
-        self.conv5 = Conditional_Conv(256,  256, batch_size, brdf_embed_size=brdf_embed_size, k=3, stride=1, pad=1)
+        self.conv1 = Conditional_Conv(c_in, 64, batch_size, brdf_embed_size, k=3, stride=1, pad=1)
+        self.conv2 = Conditional_Conv(64, 128, batch_size, brdf_embed_size, k=3, stride=2, pad=1)
+        self.conv3 = Conditional_Conv(128, 128, batch_size, brdf_embed_size, k=3, stride=1, pad=1)
+        self.conv4 = Conditional_Conv(128,  256, batch_size, brdf_embed_size, k=3, stride=2, pad=1)
+        self.conv5 = Conditional_Conv(256,  256, batch_size, brdf_embed_size, k=3, stride=1, pad=1)
 
         # upsampling
         self.conv6 = model_utils.deconv(256, 128)
@@ -99,16 +99,24 @@ class Regressor_CBN(nn.Module):
         return normal
 
 class PS_FCN_CBN(nn.Module):
-    def __init__(self, batch_size, fuse_type='max', batchNorm=True, c_in=6, other={}, brdf_input_size=14, brdf_embed_size=512):
+    def __init__(self, 
+                batch_size, 
+                fuse_type='max', 
+                batchNorm=True, 
+                c_in=3, 
+                other={},
+                brdf_input_size=14, 
+                brdf_embed_size=512):
         super(PS_FCN_CBN, self).__init__()
-        self.brdf_embed_block = BRDF_EmbedBlock(brdf_input_size, brdf_embed_size)
 
-        self.extractor = FeatExtractor_CBN(batch_size, c_in=6, batchNorm=False, other=other, brdf_embed_size=brdf_embed_size)
-        self.regressor = Regressor_CBN(batchNorm, other)
         self.c_in      = c_in
         self.fuse_type = fuse_type
         self.other = other
 
+        self.brdf_embed_block = BRDF_EmbedBlock(brdf_input_size, brdf_embed_size)
+        c_in_concatenated = self.c_in*2
+        self.extractor = FeatExtractor_CBN(batch_size, c_in_concatenated, batchNorm=False, other=other, brdf_embed_size=brdf_embed_size)
+        self.regressor = Regressor_CBN(batchNorm, other)
 
         for m in self.modules():
             if isinstance(m, nn.Conv2d) or isinstance(m, nn.ConvTranspose2d):
@@ -123,8 +131,8 @@ class PS_FCN_CBN(nn.Module):
         # print("DEBUG: img.shape = ", img.shape)
         # print("DEBUG: light.shape = ", light.shape)
         # print("DEBUG: brdf.shape = ", brdf.shape)
-        img_split = torch.split(img, 3, 1)
-        light_split = torch.split(light, 3, 1) if light is not None else [None] * len(img_split)
+        img_split = torch.split(img, self.c_in, 1)
+        light_split = torch.split(light, self.c_in, 1) if light is not None else [None] * len(img_split)
 
         brdf_embedding_vector = self.brdf_embed_block(brdf)
 
@@ -134,6 +142,9 @@ class PS_FCN_CBN(nn.Module):
                 net_in = torch.cat([img_split[i], light_split[i]], 1)
             else:
                 net_in = img_split[i]
+            # print("DEBUG: ", img_split[i].shape)
+            # print("DEBUG: ", light_split[i].shape)
+            # print("DEBUG: ", net_in.shape)
             feat, shape = self.extractor(net_in, brdf_embedding_vector)
             feats.append(feat)
 
