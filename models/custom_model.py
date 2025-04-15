@@ -12,7 +12,7 @@ def buildModel(args):
     #     model = PS_FCN(args.fuse_type, args.use_BN, in_c, other)
     elif args.model == 'PS_FCN_CBN':
         from models.PS_FCN_feature1 import PS_FCN_CBN
-        model = PS_FCN_CBN(args.batch, args.image_height, args.image_width, 
+        model = PS_FCN_CBN(args.batch, 
                            fuse_type=args.fuse_type, batchNorm= args.use_BN, 
                            in_c=in_c, other=other)
         pass

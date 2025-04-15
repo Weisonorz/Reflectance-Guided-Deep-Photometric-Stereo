@@ -1,11 +1,12 @@
 from . import PS_FCN_feature1
 import torch
-from torchsummary import summary
+# from torchsummary import summary
+from torchinfo import summary
 
 device="cuda" if torch.cuda.is_available() else "cpu"
 
 # Hyperparameters and input dimensions
-batch_size = 4
+batch_size = 10
 height = 128
 width = 128
 c_in_new = 3
@@ -19,10 +20,10 @@ light_input = torch.rand(batch_size, c_in_new, height, width)
 brdf = torch.rand(14,)
 
 # Initialize the model
-model = PS_FCN_feature1.PS_FCN_CBN(batch_size, height, width, fuse_type='max', batchNorm=True, c_in=6).to(device)
+model = PS_FCN_feature1.PS_FCN_CBN(batch_size, fuse_type='max', batchNorm=True, c_in=c_in_new).to(device)
 
 # Model summary
-# summary(model, [(c_in_new, height, width), (c_in_new, height, width), (14,)])
-output = model([img_input.to(device), light_input.to(device), brdf.to(device)])
-print(output.shape)
-print(output)
+summary(model, 
+        input_data=(img_input.to(device), light_input.to(device), brdf.to(device)),  # pass as tuple
+        col_names=["input_size", "output_size", "num_params", "kernel_size"],
+        depth=3)

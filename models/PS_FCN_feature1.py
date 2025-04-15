@@ -29,7 +29,7 @@ class Conditional_Conv(nn.Module):
 
         self.regular_conv = nn.Conv2d(cin, cout, kernel_size=k, stride=stride, padding=pad, bias=False)
         
-        self.cBatchNorm = cbn.CBN(brdf_embed_size, brdf_embed_size,cout, batch_size, cout)
+        self.cBatchNorm = cbn.CBN(brdf_embed_size, brdf_embed_size, cout, batch_size, cout)
         self.activation = nn.LeakyReLU(0.1, inplace=True)
 
     
@@ -45,7 +45,7 @@ class FeatExtractor_CBN(nn.Module):
     '''
     Remember to pass in batch_size, height, width
     '''
-    def __init__(self, batch_size, height, width, c_in=6, batchNorm=False, other={}, brdf_embed_size=512):
+    def __init__(self, batch_size, c_in=6, batchNorm=False, other={}, brdf_embed_size=512):
         
         super(FeatExtractor_CBN, self).__init__()
 
@@ -64,7 +64,6 @@ class FeatExtractor_CBN(nn.Module):
         self.conv7 = model_utils.conv(batchNorm, 128, 128, k=3, stride=1, pad=1)
 
     def forward(self, x, brdf_embed_vector):
-
         out = self.conv1(x, brdf_embed_vector)
         out = self.conv2(out, brdf_embed_vector)
         out = self.conv3(out, brdf_embed_vector)
@@ -72,8 +71,8 @@ class FeatExtractor_CBN(nn.Module):
         out = self.conv5(out, brdf_embed_vector)
         out = self.conv6(out)
         out_feat = self.conv7(out)
-        n, c, h, w = out_feat.data.shape
-        out_feat   = out_feat.view(-1)
+        n, c, h, w = out_feat.size()
+        out_feat = out_feat.view(n, -1)
         return out_feat, [n, c, h, w]
 
 class Regressor_CBN(nn.Module):
@@ -100,11 +99,11 @@ class Regressor_CBN(nn.Module):
         return normal
 
 class PS_FCN_CBN(nn.Module):
-    def __init__(self, batch_size, height, width, fuse_type='max', batchNorm=True, c_in=6, other={}, brdf_input_size=14, brdf_embed_size=512):
+    def __init__(self, batch_size, fuse_type='max', batchNorm=True, c_in=6, other={}, brdf_input_size=14, brdf_embed_size=512):
         super(PS_FCN_CBN, self).__init__()
         self.brdf_embed_block = BRDF_EmbedBlock(brdf_input_size, brdf_embed_size)
 
-        self.extractor = FeatExtractor_CBN(batch_size, height, width, c_in=6, batchNorm=False, other=other, brdf_embed_size=brdf_embed_size)
+        self.extractor = FeatExtractor_CBN(batch_size, c_in=6, batchNorm=False, other=other, brdf_embed_size=brdf_embed_size)
         self.regressor = Regressor_CBN(batchNorm, other)
         self.c_in      = c_in
         self.fuse_type = fuse_type
@@ -120,29 +119,31 @@ class PS_FCN_CBN(nn.Module):
                 m.weight.data.fill_(1)
                 m.bias.data.zero_()
 
-    def forward(self, x):
-        img   = x[0]
+    def forward(self, img, light=None, brdf=None):
+        # print("DEBUG: img.shape = ", img.shape)
+        # print("DEBUG: light.shape = ", light.shape)
+        # print("DEBUG: brdf.shape = ", brdf.shape)
         img_split = torch.split(img, 3, 1)
-        if len(x) > 1: # Have lighting
-            light = x[1]
-            light_split = torch.split(light, 3, 1)
+        light_split = torch.split(light, 3, 1) if light is not None else [None] * len(img_split)
 
-        brdf = x [2]
         brdf_embedding_vector = self.brdf_embed_block(brdf)
 
-        shape = None 
-        
         feats = []
         for i in range(len(img_split)):
-            net_in = img_split[i] if len(x) == 1 else torch.cat([img_split[i], light_split[i]], 1)
+            if light is not None:
+                net_in = torch.cat([img_split[i], light_split[i]], 1)
+            else:
+                net_in = img_split[i]
             feat, shape = self.extractor(net_in, brdf_embedding_vector)
             feats.append(feat)
-        feat_fused = None 
+
+
         if self.fuse_type == 'mean':
             feat_fused = torch.stack(feats, 1).mean(1)
         elif self.fuse_type == 'max':
             feat_fused, _ = torch.stack(feats, 1).max(1)
-        else: 
+        else:
             raise ValueError(f"Unsupported fuse_type: {self.fuse_type}")
+
         normal = self.regressor(feat_fused, shape)
         return normal
