@@ -16,8 +16,6 @@ class CBN(nn.Module):
                  out_size, 
                  batch_size, 
                  channels, 
-                 height, 
-                 width, 
                  use_betas=True, 
                  use_gammas=True, 
                  eps=1.0e-5):
@@ -31,8 +29,6 @@ class CBN(nn.Module):
 
         self.batch_size = batch_size
         self.channels = channels
-        self.height = height
-        self.width = width
 
         # beta and gamma parameters for each channel - defined as trainable parameters
         # device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
@@ -52,6 +48,8 @@ class CBN(nn.Module):
             nn.ReLU(inplace=True),
             nn.Linear(self.emb_size, self.out_size),
             ).cuda()
+        
+        self.delta_betas, self.delta_gammas = None, None
 
         # initialize weights using Xavier initialization and biases with constant value
         for m in self.modules():
@@ -99,16 +97,16 @@ class CBN(nn.Module):
     def forward(self, feature, brdf_emb):
         self.batch_size, self.channels, self.height, self.width = feature.data.shape
 
-
+        if self.delta_betas is None or self.delta_gammas is None:
         # get delta values
-        delta_betas, delta_gammas = self.create_cbn_input(brdf_emb)
+            self.delta_betas, self.delta_gammas = self.create_cbn_input(brdf_emb)
 
         betas_cloned = self.betas.clone()
         gammas_cloned = self.gammas.clone()
 
         # update the values of beta and gamma
-        betas_cloned += delta_betas
-        gammas_cloned += delta_gammas
+        betas_cloned += self.delta_betas
+        gammas_cloned += self.delta_gammas
 
         # get the mean and variance for the batch norm layer
         batch_mean = torch.mean(feature)

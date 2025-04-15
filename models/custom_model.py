@@ -7,20 +7,20 @@ def buildModel(args):
     if args.model == 'PS_FCN': 
         from models.PS_FCN import PS_FCN
         model = PS_FCN(args.fuse_type, args.use_BN, in_c, other)
-    elif args.model == 'PS_FCN_run':
-        from models.PS_FCN_run import PS_FCN
-        model = PS_FCN(args.fuse_type, args.use_BN, in_c, other)
+    # elif args.model == 'PS_FCN_run':
+    #     from models.PS_FCN_run import PS_FCN
+    #     model = PS_FCN(args.fuse_type, args.use_BN, in_c, other)
     elif args.model == 'PS_FCN_CBN':
         from models.PS_FCN_feature1 import PS_FCN_CBN
-        # model = PS_FCN_CBN(fuse_type=args.fuse_type, batchNorm= args.use_BN, in_c, other=other)
+        model = PS_FCN_CBN(args.batch, args.image_height, args.image_width, 
+                           fuse_type=args.fuse_type, batchNorm= args.use_BN, 
+                           in_c=in_c, other=other)
         pass
     else:
         raise Exception("=> Unknown Model '{}'".format(args.model))
     
     if args.cuda: 
         model = model.cuda()
-    
-
     
     if args.retrain: 
         if args.model == 'PS_FCN_CBN':

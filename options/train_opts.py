@@ -18,7 +18,7 @@ class TrainOpts(BaseOpts):
         self.parser.add_argument('--crop_w',      default=32,    type=int)
         self.parser.add_argument('--noise_aug',   default=True,  action='store_false')
         self.parser.add_argument('--noise',       default=0.05,  type=float)
-        self.parser.add_argument('--color_aug',   default=True,  action='store_false') 
+        self.parser.add_argument('--color_aug',   default=True,  action='store_false')
 
         #### Training Arguments ####
         self.parser.add_argument('--model',       default='PS_FCN')

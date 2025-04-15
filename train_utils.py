@@ -5,7 +5,7 @@ import tqdm
 def train(args, loader, model, criterion, optimizer, log, epoch, recorder):
     model.train()
     print('---- Start Training Epoch %d: %d batches ----' % (epoch, len(loader)))
-    timer = time_utils.Timer(args.time_sync);
+    timer = time_utils.Timer(args.time_sync)
 
     for i, sample in enumerate(loader):
         data  = model_utils.parseData(args, sample, timer, 'train')
@@ -14,7 +14,7 @@ def train(args, loader, model, criterion, optimizer, log, epoch, recorder):
         out_var = model(input); timer.updateTime('Forward')
 
         optimizer.zero_grad()
-        loss = criterion.forward(out_var, data['tar']); timer.updateTime('Crit');
+        loss = criterion.forward(out_var, data['tar']); timer.updateTime('Crit')
         criterion.backward(); timer.updateTime('Backward')
 
         recorder.updateIter('train', loss.keys(), loss.values())

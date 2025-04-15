@@ -24,12 +24,12 @@ class BRDF_EmbedBlock(nn.Module):
         return x
 
 class Conditional_Conv(nn.Module):
-    def __init__(self, cin, cout, batch_size, height, width, brdf_embed_size=512, k=3, stride=1, pad=-1):
+    def __init__(self, cin, cout, batch_size, brdf_embed_size=512, k=3, stride=1, pad=-1):
         super(Conditional_Conv, self).__init__()
 
         self.regular_conv = nn.Conv2d(cin, cout, kernel_size=k, stride=stride, padding=pad, bias=False)
         
-        self.cBatchNorm = cbn.CBN(brdf_embed_size, brdf_embed_size,cout, batch_size, cout, height, width)
+        self.cBatchNorm = cbn.CBN(brdf_embed_size, brdf_embed_size,cout, batch_size, cout)
         self.activation = nn.LeakyReLU(0.1, inplace=True)
 
     
@@ -53,11 +53,11 @@ class FeatExtractor_CBN(nn.Module):
         self.other = other
 
         # downsampling
-        self.conv1 = Conditional_Conv(c_in, 64, batch_size, height, width, brdf_embed_size=brdf_embed_size, k=3, stride=1, pad=1)
-        self.conv2 = Conditional_Conv(64, 128, batch_size, height, width, brdf_embed_size=brdf_embed_size, k=3, stride=2, pad=1)
-        self.conv3 = Conditional_Conv(128, 128, batch_size, height, width, brdf_embed_size=brdf_embed_size, k=3, stride=1, pad=1)
-        self.conv4 = Conditional_Conv(128,  256, batch_size, height, width, brdf_embed_size=brdf_embed_size, k=3, stride=2, pad=1)
-        self.conv5 = Conditional_Conv(256,  256, batch_size, height, width, brdf_embed_size=brdf_embed_size, k=3, stride=1, pad=1)
+        self.conv1 = Conditional_Conv(c_in, 64, batch_size, brdf_embed_size=brdf_embed_size, k=3, stride=1, pad=1)
+        self.conv2 = Conditional_Conv(64, 128, batch_size, brdf_embed_size=brdf_embed_size, k=3, stride=2, pad=1)
+        self.conv3 = Conditional_Conv(128, 128, batch_size, brdf_embed_size=brdf_embed_size, k=3, stride=1, pad=1)
+        self.conv4 = Conditional_Conv(128,  256, batch_size, brdf_embed_size=brdf_embed_size, k=3, stride=2, pad=1)
+        self.conv5 = Conditional_Conv(256,  256, batch_size, brdf_embed_size=brdf_embed_size, k=3, stride=1, pad=1)
 
         # upsampling
         self.conv6 = model_utils.deconv(256, 128)
