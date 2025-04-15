@@ -10,11 +10,13 @@ from datasets.blobby import BlobbyDataset
 
 @torch.no_grad
 def eval(model, val_loader, device): 
+    model.eval()
     batch_bar = tqdm(total=len(val_loader), dynamic_ncols=True, position=0, leave=False, desc='Val')
     mae = meanAngularError()
     num_samples = 0
     total_error = 0.
     for i, (images, bsdfs, angles, normals) in enumerate(val_loader):
+    
         images = images.to(device) 
         bsdfs = bsdfs.to(device)
         angles = angles.to(device)
@@ -22,10 +24,9 @@ def eval(model, val_loader, device):
         broadcasted_angles = broadcast_angles(angles, images.shape[-2], images.shape[-1]) 
         input = [images, broadcasted_angles]
         pred_normals = model(input)
-        # breakpoint()
 
         mask = get_mask(normals)
-        breakpoint()
+        # breakpoint()
         angular_error = mae.update(normals, pred_normals, mask)
         batch_bar.set_postfix(
             MAE=f"{angular_error:.4f}",
@@ -33,7 +34,7 @@ def eval(model, val_loader, device):
         batch_bar.update()
 
     batch_bar.close()
-    print(f"Validation MAE: {mae.error:.4f}")
+    print(f"Validation MAE: {mae.running_mean:.4f}")
 
         
     

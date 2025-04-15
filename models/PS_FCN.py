@@ -1,8 +1,3 @@
-
-"""
-Complete replica of PS_FCN as a baseline model
-"""
-
 import torch
 import torch.nn as nn
 from torch.nn.init import kaiming_normal_
@@ -56,7 +51,7 @@ class Regressor(nn.Module):
         return normal
 
 class PS_FCN(nn.Module):
-    def __init__(self, fuse_type='max', batchNorm=False, c_in=6, other={}):
+    def __init__(self, fuse_type='max', batchNorm=False, c_in=3, other={}):
         super(PS_FCN, self).__init__()
         self.extractor = FeatExtractor(batchNorm, c_in, other)
         self.regressor = Regressor(batchNorm, other)
@@ -80,19 +75,14 @@ class PS_FCN(nn.Module):
             light = x[1]
             light_split = torch.split(light, 3, 1)
 
-        shape = None 
-        
         feats = []
         for i in range(len(img_split)):
             net_in = img_split[i] if len(x) == 1 else torch.cat([img_split[i], light_split[i]], 1)
             feat, shape = self.extractor(net_in)
             feats.append(feat)
-        feat_fused = None 
         if self.fuse_type == 'mean':
             feat_fused = torch.stack(feats, 1).mean(1)
         elif self.fuse_type == 'max':
             feat_fused, _ = torch.stack(feats, 1).max(1)
-        else: 
-            raise ValueError(f"Unsupported fuse_type: {self.fuse_type}")
         normal = self.regressor(feat_fused, shape)
         return normal

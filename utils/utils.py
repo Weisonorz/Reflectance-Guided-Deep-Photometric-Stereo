@@ -4,7 +4,7 @@ from torch import Tensor
 
 def lightpos2angle(positions) -> Tensor: 
     """
-    Given a light position, returns unit vector from that position to (0,0,0). 
+    Convert raw light positions to normailzed angles with the same coordinate system as in PS-FCN. 
     Args: 
         positions (ArrayLike): [N, 3] or [3]
     Returns:
@@ -16,12 +16,10 @@ def lightpos2angle(positions) -> Tensor:
     if positions.ndim == 1:
         positions = positions.unsqueeze(0)  # Add a batch dimension if it's a single point
 
-    origin = torch.zeros_like(positions)  # Create a tensor of zeros with the same shape as positions
-    direction_vectors = origin - positions  # Calculate the vector from the light position to the origin
-
+    positions[..., 2] = -positions[..., 2]  # Invert the z-coordinate
     # Normalize the direction vectors to get unit vectors
-    magnitudes = torch.linalg.vector_norm(direction_vectors, dim=-1, keepdim=True)
-    unit_vectors = direction_vectors / magnitudes
+    magnitudes = torch.linalg.vector_norm(positions, dim=-1, keepdim=True)
+    unit_vectors = positions / magnitudes
 
     if unit_vectors.shape[0] == 1 and len(unit_vectors.shape)>1:
         return unit_vectors.squeeze(0)
@@ -49,6 +47,31 @@ def broadcast_angles(angles: Tensor, height, width) -> Tensor:
 
 def get_mask(normals: Tensor): 
     """
-    Given a normal map of shape [N, 3, H, W] or [3, H, W], get the mask that contains all valid normals
+    Given a normal map of shape [N, 3, H, W] or [3, H, W], get the mask that contains all valid normals (i.e the forground)
     """
     return torch.linalg.norm(normals, dim=-3) > 1e-5  
+
+import os
+
+def makeFile(f):
+    if not os.path.exists(f):
+        os.makedirs(f)
+
+def makeFiles(f_list):
+    for f in f_list:
+        makeFile(f)
+
+def dictToString(dicts, start='\t', end='\n'):
+    strs = '' 
+    for k, v in sorted(dicts.items()):
+        strs += '%s%s: %s%s' % (start, str(k), str(v), end) 
+    return strs
+
+def checkIfInList(list1, list2):
+    contains = []
+    for l1 in list1:
+        for l2 in list2:
+            if l1 in l2.lower():
+                contains.append(l1)
+                break
+    return contains

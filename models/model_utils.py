@@ -45,12 +45,22 @@ def get_n_params(model):
         pp += nn
     return pp
 
-def loadCheckpoint(path, model, cuda=True):
+def loadCheckpoint_to_PSFCN(path, model, cuda=True):
     if cuda:
         checkpoint = torch.load(path)
     else:
         checkpoint = torch.load(path, map_location=lambda storage, loc: storage)
     model.load_state_dict(checkpoint['state_dict'])
+
+def loadCheckpoint_to_PSFCN_CBN(path, model, cuda=True):
+    if cuda:
+        checkpoint = torch.load(path)
+    else:
+        checkpoint = torch.load(path, map_location=lambda storage, loc: storage)
+    model_dict = model.state_dict()
+    pretrained_dict = {k: v for k, v in checkpoint['state_dict'].items() if k in model_dict}
+    model_dict.update(pretrained_dict)
+    model.load_state_dict(model_dict)
 
 def saveCheckpoint(save_path, epoch=-1, model=None, optimizer=None, records=None, args=None):
     state   = {'state_dict': model.state_dict(), 'model': args.model}

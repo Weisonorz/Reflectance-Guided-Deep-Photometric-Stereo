@@ -31,7 +31,10 @@ def get_loader(dataset: Dataset, batch_size: int, val_split: float, random_seed:
 	train_dataset, val_dataset = random_split(dataset,[1.0-val_split, val_split]) 
 	train_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True)
 	val_loader = DataLoader(val_dataset, batch_size =batch_size, shuffle=False) 
+	return train_dataset, val_dataset, train_loader, val_loader
 
-	return train_dataset, val_dataset, train_loader, val_loader 
+
+
+
 
 
