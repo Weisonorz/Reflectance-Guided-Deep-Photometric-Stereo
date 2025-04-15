@@ -95,8 +95,8 @@ class CBN(nn.Module):
            and subsequent CBN layers will also require brdf question embeddings
     '''
     def forward(self, feature, brdf_emb):
-        print("DEBUG: feature.shape = ", feature.shape)
-        print("DEBUG: brdf_emb.shape = ", brdf_emb.shape)
+        # print("DEBUG: feature.shape = ", feature.shape)
+        # print("DEBUG: brdf_emb.shape = ", brdf_emb.shape)
         self.batch_size, self.channels, self.height, self.width = feature.shape
 
         if self.delta_betas is None or self.delta_gammas is None:
