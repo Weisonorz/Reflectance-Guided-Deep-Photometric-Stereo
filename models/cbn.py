@@ -18,7 +18,9 @@ class CBN(nn.Module):
                  channels, 
                  use_betas=True, 
                  use_gammas=True, 
-                 eps=1.0e-5):
+                 eps=1.0e-5,
+                 momentum=0.1,
+                 track_running_stats=True):
         super(CBN, self).__init__()
 
         self.brdf_emb_size = brdf_emb_size # size of the brdf emb which is input to MLP
@@ -29,11 +31,12 @@ class CBN(nn.Module):
 
         self.batch_size = batch_size
         self.channels = channels
+        self.momentum = momentum
+        self.track_running_stats = track_running_stats
 
         # beta and gamma parameters for each channel - defined as trainable parameters
-        # device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-        self.betas = nn.Parameter(torch.zeros((self.batch_size, self.channels)))
-        self.gammas = nn.Parameter(torch.ones((self.batch_size, self.channels)))
+        self.betas = nn.Parameter(torch.zeros((1, self.channels)))
+        self.gammas = nn.Parameter(torch.ones((1, self.channels)))
         self.eps = eps
 
         # MLP used to predict betas and gammas
@@ -51,11 +54,21 @@ class CBN(nn.Module):
         
         self.delta_betas, self.delta_gammas = None, None
 
+        # Add running mean and variance like in PyTorch BatchNorm
+        if self.track_running_stats:
+            self.register_buffer('running_mean', torch.zeros(channels))
+            self.register_buffer('running_var', torch.ones(channels))
+            self.register_buffer('num_batches_tracked', torch.tensor(0, dtype=torch.long))
+        else:
+            self.register_parameter('running_mean', None)
+            self.register_parameter('running_var', None)
+            self.register_parameter('num_batches_tracked', None)
+
         # initialize weights using Xavier initialization and biases with constant value
         for m in self.modules():
             if isinstance(m, nn.Linear):
-                nn.init.xavier_uniform(m.weight)
-                nn.init.constant(m.bias, 0.1)
+                nn.init.xavier_uniform_(m.weight)
+                nn.init.constant_(m.bias, 0.1)
 
     '''
     Predicts the value of delta beta and delta gamma for each channel
@@ -71,12 +84,12 @@ class CBN(nn.Module):
         if self.use_betas:
             delta_betas = self.fc_beta(brdf_emb)
         else:
-            delta_betas = torch.zeros(self.batch_size, self.channels).cuda()
+            delta_betas = torch.zeros(1, self.channels).cuda()
 
         if self.use_gammas:
             delta_gammas = self.fc_gamma(brdf_emb)
         else:
-            delta_gammas = torch.zeros(self.batch_size, self.channels).cuda()
+            delta_gammas = torch.zeros(1, self.channels).cuda()
 
         return delta_betas, delta_gammas
 
@@ -95,12 +108,10 @@ class CBN(nn.Module):
            and subsequent CBN layers will also require brdf question embeddings
     '''
     def forward(self, feature, brdf_emb):
-        # print("DEBUG: feature.shape = ", feature.shape)
-        # print("DEBUG: brdf_emb.shape = ", brdf_emb.shape)
         self.batch_size, self.channels, self.height, self.width = feature.shape
 
         if self.delta_betas is None or self.delta_gammas is None:
-        # get delta values
+            # get delta values
             self.delta_betas, self.delta_gammas = self.create_cbn_input(brdf_emb)
 
         betas_cloned = self.betas.clone()
@@ -110,21 +121,40 @@ class CBN(nn.Module):
         betas_cloned += self.delta_betas
         gammas_cloned += self.delta_gammas
 
-        # get the mean and variance for the batch norm layer
-        batch_mean = torch.mean(feature)
-        batch_var = torch.var(feature)
+        # Reshape feature for statistics calculation: [N,C,H,W] -> [N,H,W,C] -> [N*H*W,C]
+        feature_flattened = feature.permute(0, 2, 3, 1).contiguous().view(-1, self.channels)
+        
+        if self.training and self.track_running_stats:
+            # Calculate batch statistics
+            batch_mean = feature_flattened.mean(0)
+            batch_var = feature_flattened.var(0, unbiased=False)
+            
+            # Update running statistics
+            if self.num_batches_tracked == 0:
+                self.running_mean.copy_(batch_mean)
+                self.running_var.copy_(batch_var)
+            else:
+                self.running_mean.mul_(1 - self.momentum).add_(batch_mean * self.momentum)
+                self.running_var.mul_(1 - self.momentum).add_(batch_var * self.momentum)
+            
+            self.num_batches_tracked += 1
+        else:
+            # Use running statistics in evaluation mode
+            batch_mean = self.running_mean
+            batch_var = self.running_var
 
-        # extend the betas and gammas of each channel across the height and width of feature map
-        betas_expanded = torch.stack([betas_cloned]*self.height, dim=2)
-        betas_expanded = torch.stack([betas_expanded]*self.width, dim=3)
+        # Expand mean and var from [C] to [N,C,H,W]
+        mean_expanded = batch_mean.view(1, self.channels, 1, 1).expand_as(feature)
+        var_expanded = batch_var.view(1, self.channels, 1, 1).expand_as(feature)
+        
+        # Normalize the feature map
+        feature_normalized = (feature - mean_expanded) / torch.sqrt(var_expanded + self.eps)
 
-        gammas_expanded = torch.stack([gammas_cloned]*self.height, dim=2)
-        gammas_expanded = torch.stack([gammas_expanded]*self.width, dim=3)
+        # Expand betas and gammas for final transformation
+        betas_expanded = betas_cloned.view(1, self.channels, 1, 1).expand_as(feature)
+        gammas_expanded = gammas_cloned.view(1, self.channels, 1, 1).expand_as(feature)
 
-        # normalize the feature map
-        feature_normalized = (feature-batch_mean)/torch.sqrt(batch_var+self.eps)
-
-        # get the normalized feature map with the updated beta and gamma values
+        # Apply conditional scaling and shifting
         out = torch.mul(feature_normalized, gammas_expanded) + betas_expanded
 
         return out, brdf_emb
