@@ -1,0 +1,9 @@
+Traceback (most recent call last):
+  File "/home/ruoguli/idl_project/train_PSFCN.py", line 51, in <module>
+    main(args)
+  File "/home/ruoguli/idl_project/train_PSFCN.py", line 32, in main
+    load_wandb(args, model)
+  File "/home/ruoguli/idl_project/train_PSFCN.py", line 22, in load_wandb
+    arch_file   = open("model_arch.txt".format())
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'model_arch.txt'

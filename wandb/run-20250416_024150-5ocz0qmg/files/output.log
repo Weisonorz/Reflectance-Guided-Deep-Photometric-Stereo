@@ -1,0 +1,20 @@
+=> Using adam solver for optimization
+=> Using cos for criterion normal
+/data2/datasets/ruoguli/miniconda/envs/torch_env/lib/python3.12/site-packages/torch/optim/lr_scheduler.py:224: UserWarning: Detected call of `lr_scheduler.step()` before `optimizer.step()`. In PyTorch 1.1.0 and later, you should call them in the opposite order: `optimizer.step()` before `lr_scheduler.step()`.  Failure to do this will result in PyTorch skipping the first value of the learning rate schedule. See more details at https://pytorch.org/docs/stable/optim.html#how-to-adjust-learning-rate
+  warnings.warn(
+---- Start Training Epoch 1: 802 batches ----
+Train:   0%|                                         | 0/802 [00:00<?, ?it/s]/home/ruoguli/idl_project/train_utils.py:18: FutureWarning: `torch.cuda.amp.GradScaler(args...)` is deprecated. Please use `torch.amp.GradScaler('cuda', args...)` instead.
+  scalar = GradScaler(enabled=args.mixed_precision)
+/home/ruoguli/idl_project/train_utils.py:25: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with autocast(enabled=args.mixed_precision):
+Train:   0%|          | 2/802 [00:06<34:43,  2.60s/it, loss=nan, lr=0.001000]Traceback (most recent call last):
+  File "/home/ruoguli/idl_project/train_PSFCN.py", line 56, in <module>
+    main(args)
+  File "/home/ruoguli/idl_project/train_PSFCN.py", line 39, in main
+    train_loss = train_utils.train(args, train_loader, model, criterion, optimizer, epoch)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ruoguli/idl_project/train_utils.py", line 36, in train
+    scalar.step(optimizer)
+  File "/data2/datasets/ruoguli/miniconda/envs/torch_env/lib/python3.12/site-packages/torch/amp/grad_scaler.py", line 392, in step
+    raise RuntimeError(
+RuntimeError: step() has already been called since the last update().

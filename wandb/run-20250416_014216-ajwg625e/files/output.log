@@ -1,0 +1,25 @@
+=> Using adam solver for optimization
+=> Using cos for criterion normal
+/data2/datasets/ruoguli/miniconda/envs/torch_env/lib/python3.12/site-packages/torch/optim/lr_scheduler.py:224: UserWarning: Detected call of `lr_scheduler.step()` before `optimizer.step()`. In PyTorch 1.1.0 and later, you should call them in the opposite order: `optimizer.step()` before `lr_scheduler.step()`.  Failure to do this will result in PyTorch skipping the first value of the learning rate schedule. See more details at https://pytorch.org/docs/stable/optim.html#how-to-adjust-learning-rate
+  warnings.warn(
+---- Start val Epoch 1: 33 batches ----
+Val:   0%|                                            | 0/33 [00:00<?, ?it/s]/home/ruoguli/idl_project/utils/eval_utils.py:12: UserWarning: indexing with dtype torch.uint8 is now deprecated, please use a dtype torch.bool instead. (Triggered internally at /opt/conda/conda-bld/pytorch_1729647329220/work/aten/src/ATen/native/IndexingUtils.h:27.)
+  ang_valid   = angular_map[mask.narrow(1, 0, 1).squeeze(1).byte()]
+Traceback (most recent call last):                                           
+> /home/ruoguli/idl_project/train_PSFCN.py(35)main()
+-> for epoch in range(args.start_epoch, args.epochs+1):
+---- Start val Epoch 2: 33 batches ----
+> /home/ruoguli/idl_project/train_PSFCN.py(35)main()
+-> for epoch in range(args.start_epoch, args.epochs+1):
+  File "/home/ruoguli/idl_project/train_PSFCN.py", line 52, in <module>
+    main(args)
+  File "/home/ruoguli/idl_project/train_PSFCN.py", line 35, in main
+    for epoch in range(args.start_epoch, args.epochs+1):
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/data2/datasets/ruoguli/miniconda/envs/torch_env/lib/python3.12/bdb.py", line 100, in trace_dispatch
+    return self.dispatch_line(frame)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/data2/datasets/ruoguli/miniconda/envs/torch_env/lib/python3.12/bdb.py", line 125, in dispatch_line
+    if self.quitting: raise BdbQuit
+                      ^^^^^^^^^^^^^
+bdb.BdbQuit

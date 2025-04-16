@@ -9,7 +9,7 @@ class BaseOpts(object):
         #### Device Arguments ####
         self.parser.add_argument('--cuda',        default=True,  action='store_false')
         self.parser.add_argument('--time_sync',   default=False, action='store_true')
-        self.parser.add_argument('--workers',     default=8,     type=int)
+        self.parser.add_argument('--workers',     default=2,     type=int)
         self.parser.add_argument('--seed',        default=0,     type=int)
 
         #### Model Arguments ####
@@ -23,6 +23,8 @@ class BaseOpts(object):
         self.parser.add_argument('--epochs',     default=30,    type=int)
         self.parser.add_argument('--resume',     default=None)
         self.parser.add_argument('--retrain',    default=None)	
+        # self.parser.add_argument('--compile',    action='store_true', help='use torch.compile')  doesn't work
+        # self.parser.add_argument('--vmap',      action='store_true', help='use torch.vmap instead of for in forward') need careful modification
 
 
         #### Log Arguments ####

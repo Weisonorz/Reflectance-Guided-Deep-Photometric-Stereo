@@ -29,11 +29,10 @@ class Criterion(object):
             self.loss        = self.n_crit(self.out_reshape, self.gt_reshape, self.flag)
         elif self.normal_loss == 'mse':
             self.loss = self.normal_w * self.n_crit(output, target)
-        out_loss = {'N_loss': self.loss.item()}
+        out_loss = {'N_loss': self.loss.item(), 'N_loss_tensor': self.loss}
         return out_loss
 
-    def backward(self):
-        self.loss.backward()
+
 
 def getOptimizer(args, params):
     print('=> Using %s solver for optimization' % (args.solver))

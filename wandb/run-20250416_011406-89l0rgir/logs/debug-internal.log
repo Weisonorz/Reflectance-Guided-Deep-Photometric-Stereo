@@ -1,0 +1,15 @@
+{"time":"2025-04-16T01:14:06.264304292-04:00","level":"INFO","msg":"stream: starting","core version":"0.19.8","symlink path":"/home/ruoguli/idl_project/wandb/run-20250416_011406-89l0rgir/logs/debug-core.log"}
+{"time":"2025-04-16T01:14:06.37174823-04:00","level":"INFO","msg":"created new stream","id":"89l0rgir"}
+{"time":"2025-04-16T01:14:06.371778968-04:00","level":"INFO","msg":"stream: started","id":"89l0rgir"}
+{"time":"2025-04-16T01:14:06.371798315-04:00","level":"INFO","msg":"writer: Do: started","stream_id":"89l0rgir"}
+{"time":"2025-04-16T01:14:06.372213848-04:00","level":"INFO","msg":"handler: started","stream_id":"89l0rgir"}
+{"time":"2025-04-16T01:14:06.372233806-04:00","level":"INFO","msg":"sender: started","stream_id":"89l0rgir"}
+{"time":"2025-04-16T01:14:06.534804473-04:00","level":"INFO","msg":"Starting system monitor"}
+{"time":"2025-04-16T01:16:02.799608169-04:00","level":"INFO","msg":"stream: closing","id":"89l0rgir"}
+{"time":"2025-04-16T01:16:02.799706627-04:00","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2025-04-16T01:16:02.800192874-04:00","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2025-04-16T01:16:03.494742087-04:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2025-04-16T01:16:03.724345471-04:00","level":"INFO","msg":"handler: closed","stream_id":"89l0rgir"}
+{"time":"2025-04-16T01:16:03.724393633-04:00","level":"INFO","msg":"writer: Close: closed","stream_id":"89l0rgir"}
+{"time":"2025-04-16T01:16:03.724413741-04:00","level":"INFO","msg":"sender: closed","stream_id":"89l0rgir"}
+{"time":"2025-04-16T01:16:03.724924475-04:00","level":"INFO","msg":"stream: closed","id":"89l0rgir"}

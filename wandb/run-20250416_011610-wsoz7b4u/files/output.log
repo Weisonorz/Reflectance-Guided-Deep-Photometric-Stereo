@@ -1,0 +1,171 @@
+=> Using adam solver for optimization
+=> Using cos for criterion normal
+/data2/datasets/ruoguli/miniconda/envs/torch_env/lib/python3.12/site-packages/torch/optim/lr_scheduler.py:224: UserWarning: Detected call of `lr_scheduler.step()` before `optimizer.step()`. In PyTorch 1.1.0 and later, you should call them in the opposite order: `optimizer.step()` before `lr_scheduler.step()`.  Failure to do this will result in PyTorch skipping the first value of the learning rate schedule. See more details at https://pytorch.org/docs/stable/optim.html#how-to-adjust-learning-rate
+  warnings.warn(
+/data2/datasets/ruoguli/miniconda/envs/torch_env/lib/python3.12/site-packages/torch/optim/lr_scheduler.py:595: UserWarning: To get the last learning rate computed by the scheduler, please use `get_last_lr()`.
+  _warn_get_lr_called_within_step(self)
+---- Start val Epoch 1: 33 batches ----
+Val:   0%|                                            | 0/33 [00:00<?, ?it/s]/home/ruoguli/idl_project/utils/eval_utils.py:12: UserWarning: indexing with dtype torch.uint8 is now deprecated, please use a dtype torch.bool instead. (Triggered internally at /opt/conda/conda-bld/pytorch_1729647329220/work/aten/src/ATen/native/IndexingUtils.h:27.)
+  ang_valid   = angular_map[mask.narrow(1, 0, 1).squeeze(1).byte()]
+Val:  27%|██████▎                | 9/33 [00:06<00:15,  1.57it/s, acc=84.9375]
+ | VAL Iter [1/33] Epoch [1/30]
+	 [Time 2.480s] ToCPU: 2.111s| ToGPU: 0.000s| Forward: 0.305s|
+	 [ERR] n_err_mean: 83.049|
+
+ | VAL Iter [2/33] Epoch [1/30]
+	 [Time 0.117s] ToCPU: 0.017s| ToGPU: 0.000s| Forward: 0.097s|
+	 [ERR] n_err_mean: 81.829|
+
+ | VAL Iter [3/33] Epoch [1/30]
+	 [Time 0.760s] ToCPU: 0.661s| ToGPU: 0.000s| Forward: 0.097s|
+	 [ERR] n_err_mean: 96.906|
+
+ | VAL Iter [4/33] Epoch [1/30]
+	 [Time 0.117s] ToCPU: 0.009s| ToGPU: 0.000s| Forward: 0.106s|
+	 [ERR] n_err_mean: 80.931|
+
+ | VAL Iter [5/33] Epoch [1/30]
+	 [Time 1.033s] ToCPU: 0.945s| ToGPU: 0.000s| Forward: 0.086s|
+	 [ERR] n_err_mean: 81.988|
+
+ | VAL Iter [6/33] Epoch [1/30]
+	 [Time 0.104s] ToCPU: 0.011s| ToGPU: 0.000s| Forward: 0.091s|
+	 [ERR] n_err_mean: 99.266|
+
+ | VAL Iter [7/33] Epoch [1/30]
+	 [Time 0.991s] ToCPU: 0.892s| ToGPU: 0.000s| Forward: 0.097s|
+	 [ERR] n_err_mean: 85.964|
+
+ | VAL Iter [8/33] Epoch [1/30]
+	 [Time 0.115s] ToCPU: 0.004s| ToGPU: 0.000s| Forward: 0.108s|
+	 [ERR] n_err_mean: 79.731|
+
+ | VAL Iter [9/33] Epoch [1/30]
+	 [Time 0.929s] ToCPU: 0.829s| ToGPU: 0.000s| Forward: 0.097s|
+	 [ERR] n_err_mean: 84.938|
+
+ | VAL Iter [10/33] Epoch [1/30]
+	 [Time 0.138s] ToCPU: 0.010s| ToGPU: 0.000s| Forward: 0.126s|
+	 [ERR] n_err_mean: 91.116|
+
+ | VAL Iter [11/33] Epoch [1/30]
+	 [Time 1.042s] ToCPU: 0.944s| ToGPU: 0.000s| Forward: 0.096s|
+	 [ERR] n_err_mean: 106.713|
+
+ | VAL Iter [12/33] Epoch [1/30]
+	 [Time 0.148s] ToCPU: 0.009s| ToGPU: 0.001s| Forward: 0.136s|
+	 [ERR] n_err_mean: 91.926|
+
+ | VAL Iter [13/33] Epoch [1/30]
+	 [Time 0.860s] ToCPU: 0.767s| ToGPU: 0.000s| Forward: 0.091s|
+	 [ERR] n_err_mean: 88.398|
+
+ | VAL Iter [14/33] Epoch [1/30]
+	 [Time 0.097s] ToCPU: 0.005s| ToGPU: 0.000s| Forward: 0.091s|
+	 [ERR] n_err_mean: 87.569|
+
+ | VAL Iter [15/33] Epoch [1/30]
+	 [Time 0.999s] ToCPU: 0.900s| ToGPU: 0.000s| Forward: 0.097s|
+	 [ERR] n_err_mean: 90.058|
+
+ | VAL Iter [16/33] Epoch [1/30]
+	 [Time 0.136s] ToCPU: 0.010s| ToGPU: 0.000s| Forward: 0.124s|
+	 [ERR] n_err_mean: 90.310|
+
+ | VAL Iter [17/33] Epoch [1/30]
+	 [Time 0.900s] ToCPU: 0.802s| ToGPU: 0.000s| Forward: 0.096s|
+	 [ERR] n_err_mean: 88.872|
+
+ | VAL Iter [18/33] Epoch [1/30]
+	 [Time 0.125s] ToCPU: 0.004s| ToGPU: 0.000s| Forward: 0.118s|
+	 [ERR] n_err_mean: 83.637|
+
+ | VAL Iter [19/33] Epoch [1/30]
+	 [Time 0.891s] ToCPU: 0.797s| ToGPU: 0.000s| Forward: 0.092s|
+	 [ERR] n_err_mean: 79.895|
+
+ | VAL Iter [20/33] Epoch [1/30]
+	 [Time 0.158s] ToCPU: 0.007s| ToGPU: 0.000s| Forward: 0.148s|
+	 [ERR] n_err_mean: 89.246|
+
+ | VAL Iter [21/33] Epoch [1/30]
+	 [Time 0.888s] ToCPU: 0.787s| ToGPU: 0.000s| Forward: 0.099s|
+	 [ERR] n_err_mean: 81.891|
+
+ | VAL Iter [22/33] Epoch [1/30]
+	 [Time 0.161s] ToCPU: 0.007s| ToGPU: 0.001s| Forward: 0.151s|
+	 [ERR] n_err_mean: 82.359|
+
+ | VAL Iter [23/33] Epoch [1/30]
+	 [Time 0.826s] ToCPU: 0.729s| ToGPU: 0.000s| Forward: 0.095s|
+	 [ERR] n_err_mean: 82.872|
+
+ | VAL Iter [24/33] Epoch [1/30]
+	 [Time 0.111s] ToCPU: 0.010s| ToGPU: 0.000s| Forward: 0.099s|
+	 [ERR] n_err_mean: 84.089|
+
+ | VAL Iter [25/33] Epoch [1/30]
+	 [Time 0.963s] ToCPU: 0.874s| ToGPU: 0.000s| Forward: 0.087s|
+	 [ERR] n_err_mean: 91.755|
+
+ | VAL Iter [26/33] Epoch [1/30]
+	 [Time 0.097s] ToCPU: 0.005s| ToGPU: 0.000s| Forward: 0.090s|
+	 [ERR] n_err_mean: 100.262|
+
+ | VAL Iter [27/33] Epoch [1/30]
+	 [Time 0.988s] ToCPU: 0.888s| ToGPU: 0.000s| Forward: 0.097s|
+	 [ERR] n_err_mean: 84.568|
+
+ | VAL Iter [28/33] Epoch [1/30]
+	 [Time 0.140s] ToCPU: 0.012s| ToGPU: 0.000s| Forward: 0.127s|
+	 [ERR] n_err_mean: 79.769|
+
+ | VAL Iter [29/33] Epoch [1/30]
+	 [Time 0.902s] ToCPU: 0.805s| ToGPU: 0.000s| Forward: 0.095s|
+	 [ERR] n_err_mean: 89.435|
+
+ | VAL Iter [30/33] Epoch [1/30]
+	 [Time 0.117s] ToCPU: 0.010s| ToGPU: 0.000s| Forward: 0.105s|
+	 [ERR] n_err_mean: 76.199|
+
+ | VAL Iter [31/33] Epoch [1/30]
+	 [Time 0.837s] ToCPU: 0.746s| ToGPU: 0.000s| Forward: 0.090s|
+	 [ERR] n_err_mean: 94.509|
+
+ | VAL Iter [32/33] Epoch [1/30]
+	 [Time 0.094s] ToCPU: 0.004s| ToGPU: 0.000s| Forward: 0.088s|
+	 [ERR] n_err_mean: 85.631|
+
+ | VAL Iter [33/33] Epoch [1/30]
+	 [Time 0.187s] ToCPU: 0.108s| ToGPU: 0.000s| Forward: 0.078s|
+	 [ERR] n_err_mean: 100.037|
+
+---------- VAL Epoch 1 Summary -----------
+	 [ERR] n_err_mean: 87.749|
+
+> /home/ruoguli/idl_project/train_PSFCN.py(37)main()
+-> for epoch in range(args.start_epoch, args.epochs+1):
+OrderedDict({'train': OrderedDict({'lr': OrderedDict({1: [0.001]})}), 'val': OrderedDict({'n_err_mean': OrderedDict({1: [np.float64(83.04932403564453), np.float64(81.82856750488281), np.float64(96.90595245361328), np.float64(80.9314956665039), np.float64(81.98841094970703), np.float64(99.26551818847656), np.float64(85.96414184570312), np.float64(79.73111724853516), np.float64(84.93753051757812), np.float64(91.11553192138672), np.float64(106.7125015258789), np.float64(91.92642211914062), np.float64(88.3979263305664), np.float64(87.5689697265625), np.float64(90.0582504272461), np.float64(90.30977630615234), np.float64(88.87183380126953), np.float64(83.63712310791016), np.float64(79.89527893066406), np.float64(89.245849609375), np.float64(81.8906021118164), np.float64(82.35904693603516), np.float64(82.87237548828125), np.float64(84.08926391601562), np.float64(91.75505065917969), np.float64(100.26224517822266), np.float64(84.56794738769531), np.float64(79.76942443847656), np.float64(89.43496704101562), np.float64(76.19928741455078), np.float64(94.50907897949219), np.float64(85.63081359863281), np.float64(100.03694915771484)]})})})
+OrderedDict({'n_err_mean': OrderedDict({1: [np.float64(83.04932403564453), np.float64(81.82856750488281), np.float64(96.90595245361328), np.float64(80.9314956665039), np.float64(81.98841094970703), np.float64(99.26551818847656), np.float64(85.96414184570312), np.float64(79.73111724853516), np.float64(84.93753051757812), np.float64(91.11553192138672), np.float64(106.7125015258789), np.float64(91.92642211914062), np.float64(88.3979263305664), np.float64(87.5689697265625), np.float64(90.0582504272461), np.float64(90.30977630615234), np.float64(88.87183380126953), np.float64(83.63712310791016), np.float64(79.89527893066406), np.float64(89.245849609375), np.float64(81.8906021118164), np.float64(82.35904693603516), np.float64(82.87237548828125), np.float64(84.08926391601562), np.float64(91.75505065917969), np.float64(100.26224517822266), np.float64(84.56794738769531), np.float64(79.76942443847656), np.float64(89.43496704101562), np.float64(76.19928741455078), np.float64(94.50907897949219), np.float64(85.63081359863281), np.float64(100.03694915771484)]})})
+OrderedDict({1: [np.float64(83.04932403564453), np.float64(81.82856750488281), np.float64(96.90595245361328), np.float64(80.9314956665039), np.float64(81.98841094970703), np.float64(99.26551818847656), np.float64(85.96414184570312), np.float64(79.73111724853516), np.float64(84.93753051757812), np.float64(91.11553192138672), np.float64(106.7125015258789), np.float64(91.92642211914062), np.float64(88.3979263305664), np.float64(87.5689697265625), np.float64(90.0582504272461), np.float64(90.30977630615234), np.float64(88.87183380126953), np.float64(83.63712310791016), np.float64(79.89527893066406), np.float64(89.245849609375), np.float64(81.8906021118164), np.float64(82.35904693603516), np.float64(82.87237548828125), np.float64(84.08926391601562), np.float64(91.75505065917969), np.float64(100.26224517822266), np.float64(84.56794738769531), np.float64(79.76942443847656), np.float64(89.43496704101562), np.float64(76.19928741455078), np.float64(94.50907897949219), np.float64(85.63081359863281), np.float64(100.03694915771484)]})
+odict_keys(['n_err_mean'])
+odict_keys([1])
+[np.float64(83.04932403564453), np.float64(81.82856750488281), np.float64(96.90595245361328), np.float64(80.9314956665039), np.float64(81.98841094970703), np.float64(99.26551818847656), np.float64(85.96414184570312), np.float64(79.73111724853516), np.float64(84.93753051757812), np.float64(91.11553192138672), np.float64(106.7125015258789), np.float64(91.92642211914062), np.float64(88.3979263305664), np.float64(87.5689697265625), np.float64(90.0582504272461), np.float64(90.30977630615234), np.float64(88.87183380126953), np.float64(83.63712310791016), np.float64(79.89527893066406), np.float64(89.245849609375), np.float64(81.8906021118164), np.float64(82.35904693603516), np.float64(82.87237548828125), np.float64(84.08926391601562), np.float64(91.75505065917969), np.float64(100.26224517822266), np.float64(84.56794738769531), np.float64(79.76942443847656), np.float64(89.43496704101562), np.float64(76.19928741455078), np.float64(94.50907897949219), np.float64(85.63081359863281), np.float64(100.03694915771484)]
+<class 'list'>
+*** NameError: name 'np' is not defined
+[np.float64(83.04932403564453), np.float64(81.82856750488281), np.float64(96.90595245361328), np.float64(80.9314956665039), np.float64(81.98841094970703), np.float64(99.26551818847656), np.float64(85.96414184570312), np.float64(79.73111724853516), np.float64(84.93753051757812), np.float64(91.11553192138672), np.float64(106.7125015258789), np.float64(91.92642211914062), np.float64(88.3979263305664), np.float64(87.5689697265625), np.float64(90.0582504272461), np.float64(90.30977630615234), np.float64(88.87183380126953), np.float64(83.63712310791016), np.float64(79.89527893066406), np.float64(89.245849609375), np.float64(81.8906021118164), np.float64(82.35904693603516), np.float64(82.87237548828125), np.float64(84.08926391601562), np.float64(91.75505065917969), np.float64(100.26224517822266), np.float64(84.56794738769531), np.float64(79.76942443847656), np.float64(89.43496704101562), np.float64(76.19928741455078), np.float64(94.50907897949219), np.float64(85.63081359863281), np.float64(100.03694915771484)]
+np.float64(87.74904771284623)
+*** SyntaxError: invalid syntax
+OrderedDict({'n_err_mean': OrderedDict({1: [np.float64(83.04932403564453), np.float64(81.82856750488281), np.float64(96.90595245361328), np.float64(80.9314956665039), np.float64(81.98841094970703), np.float64(99.26551818847656), np.float64(85.96414184570312), np.float64(79.73111724853516), np.float64(84.93753051757812), np.float64(91.11553192138672), np.float64(106.7125015258789), np.float64(91.92642211914062), np.float64(88.3979263305664), np.float64(87.5689697265625), np.float64(90.0582504272461), np.float64(90.30977630615234), np.float64(88.87183380126953), np.float64(83.63712310791016), np.float64(79.89527893066406), np.float64(89.245849609375), np.float64(81.8906021118164), np.float64(82.35904693603516), np.float64(82.87237548828125), np.float64(84.08926391601562), np.float64(91.75505065917969), np.float64(100.26224517822266), np.float64(84.56794738769531), np.float64(79.76942443847656), np.float64(89.43496704101562), np.float64(76.19928741455078), np.float64(94.50907897949219), np.float64(85.63081359863281), np.float64(100.03694915771484)]})})
+odict_keys(['n_err_mean'])
+  File "/home/ruoguli/idl_project/train_PSFCN.py", line 51, in <module>
+    torch.manual_seed(args.seed)
+    ^^^^^^^^^^
+  File "/home/ruoguli/idl_project/train_PSFCN.py", line 37, in main
+  File "/data2/datasets/ruoguli/miniconda/envs/torch_env/lib/python3.12/bdb.py", line 100, in trace_dispatch
+    return self.dispatch_line(frame)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/data2/datasets/ruoguli/miniconda/envs/torch_env/lib/python3.12/bdb.py", line 125, in dispatch_line
+    if self.quitting: raise BdbQuit
+                      ^^^^^^^^^^^^^
+bdb.BdbQuit

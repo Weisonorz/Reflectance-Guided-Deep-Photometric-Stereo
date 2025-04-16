@@ -1,0 +1,1 @@
+/home/ruoguli/idl_project/model_arch.txt

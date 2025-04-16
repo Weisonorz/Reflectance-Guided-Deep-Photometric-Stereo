@@ -1,0 +1,15 @@
+{"time":"2025-04-16T01:10:11.689917321-04:00","level":"INFO","msg":"stream: starting","core version":"0.19.8","symlink path":"/home/ruoguli/idl_project/wandb/run-20250416_011011-tge3kv8n/logs/debug-core.log"}
+{"time":"2025-04-16T01:10:11.797234223-04:00","level":"INFO","msg":"created new stream","id":"tge3kv8n"}
+{"time":"2025-04-16T01:10:11.797262888-04:00","level":"INFO","msg":"stream: started","id":"tge3kv8n"}
+{"time":"2025-04-16T01:10:11.797279289-04:00","level":"INFO","msg":"writer: Do: started","stream_id":"tge3kv8n"}
+{"time":"2025-04-16T01:10:11.797747832-04:00","level":"INFO","msg":"handler: started","stream_id":"tge3kv8n"}
+{"time":"2025-04-16T01:10:11.797766879-04:00","level":"INFO","msg":"sender: started","stream_id":"tge3kv8n"}
+{"time":"2025-04-16T01:10:11.953200285-04:00","level":"INFO","msg":"Starting system monitor"}
+{"time":"2025-04-16T01:10:31.357150674-04:00","level":"INFO","msg":"stream: closing","id":"tge3kv8n"}
+{"time":"2025-04-16T01:10:31.357243321-04:00","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2025-04-16T01:10:31.357733466-04:00","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2025-04-16T01:10:32.20255254-04:00","level":"INFO","msg":"fileTransfer: Close: file transfer manager closed"}
+{"time":"2025-04-16T01:10:32.468167931-04:00","level":"INFO","msg":"handler: closed","stream_id":"tge3kv8n"}
+{"time":"2025-04-16T01:10:32.468211564-04:00","level":"INFO","msg":"writer: Close: closed","stream_id":"tge3kv8n"}
+{"time":"2025-04-16T01:10:32.468238956-04:00","level":"INFO","msg":"sender: closed","stream_id":"tge3kv8n"}
+{"time":"2025-04-16T01:10:32.469125707-04:00","level":"INFO","msg":"stream: closed","id":"tge3kv8n"}

@@ -13,8 +13,6 @@ class CBN(nn.Module):
     def __init__(self, 
                  brdf_emb_size, 
                  emb_size, 
-                 out_size, 
-                 batch_size, 
                  channels, 
                  use_betas=True, 
                  use_gammas=True, 
@@ -25,14 +23,14 @@ class CBN(nn.Module):
 
         self.brdf_emb_size = brdf_emb_size # size of the brdf emb which is input to MLP
         self.emb_size = emb_size # size of hidden layer of MLP
-        self.out_size = out_size # output of the MLP - for each channel
+        self.out_size = channels
         self.use_betas = use_betas
         self.use_gammas = use_gammas
 
-        self.batch_size = batch_size
         self.channels = channels
         self.momentum = momentum
         self.track_running_stats = track_running_stats
+
 
         # beta and gamma parameters for each channel - defined as trainable parameters
         self.betas = nn.Parameter(torch.zeros((1, self.channels)))
@@ -44,13 +42,13 @@ class CBN(nn.Module):
             nn.Linear(self.brdf_emb_size, self.emb_size),
             nn.ReLU(inplace=True),
             nn.Linear(self.emb_size, self.out_size),
-            ).cuda()
+            )
 
         self.fc_beta = nn.Sequential(
             nn.Linear(self.brdf_emb_size, self.emb_size),
             nn.ReLU(inplace=True),
             nn.Linear(self.emb_size, self.out_size),
-            ).cuda()
+            )
         
         self.delta_betas, self.delta_gammas = None, None
 
@@ -84,12 +82,12 @@ class CBN(nn.Module):
         if self.use_betas:
             delta_betas = self.fc_beta(brdf_emb)
         else:
-            delta_betas = torch.zeros(1, self.channels).cuda()
+            delta_betas = torch.zeros(1, self.channels, device=brdf_emb.device)
 
         if self.use_gammas:
             delta_gammas = self.fc_gamma(brdf_emb)
         else:
-            delta_gammas = torch.zeros(1, self.channels).cuda()
+            delta_gammas = torch.zeros(1, self.channels, device=brdf_emb.device)
 
         return delta_betas, delta_gammas
 
@@ -110,16 +108,12 @@ class CBN(nn.Module):
     def forward(self, feature, brdf_emb):
         self.batch_size, self.channels, self.height, self.width = feature.shape
 
-        if self.delta_betas is None or self.delta_gammas is None:
-            # get delta values
-            self.delta_betas, self.delta_gammas = self.create_cbn_input(brdf_emb)
+        self.delta_betas, self.delta_gammas = self.create_cbn_input(brdf_emb)
 
-        betas_cloned = self.betas.clone()
-        gammas_cloned = self.gammas.clone()
 
         # update the values of beta and gamma
-        betas_cloned += self.delta_betas
-        gammas_cloned += self.delta_gammas
+        betas_modified = self.betas + self.delta_betas
+        gamma_modified = self.gammas + self.delta_gammas
 
         # Reshape feature for statistics calculation: [N,C,H,W] -> [N,H,W,C] -> [N*H*W,C]
         feature_flattened = feature.permute(0, 2, 3, 1).contiguous().view(-1, self.channels)
@@ -151,13 +145,11 @@ class CBN(nn.Module):
         feature_normalized = (feature - mean_expanded) / torch.sqrt(var_expanded + self.eps)
 
         # Expand betas and gammas for final transformation
-        betas_expanded = betas_cloned.view(1, self.channels, 1, 1).expand_as(feature)
-        gammas_expanded = gammas_cloned.view(1, self.channels, 1, 1).expand_as(feature)
+        betas_expanded = betas_modified.view(self.batch_size, self.channels, 1, 1).expand_as(feature)
+        gammas_expanded = gamma_modified.view(self.batch_size, self.channels, 1, 1).expand_as(feature)
 
         # Apply conditional scaling and shifting
         out = torch.mul(feature_normalized, gammas_expanded) + betas_expanded
 
         return out, brdf_emb
     
-    def __call__(self, x, brdf_embed):
-        return self.forward(x, brdf_embed)

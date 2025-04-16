@@ -1,3 +1,4 @@
+from xxlimited import Str
 from .base_opts import BaseOpts
 class TrainOpts(BaseOpts):
     def __init__(self):
@@ -21,7 +22,7 @@ class TrainOpts(BaseOpts):
         self.parser.add_argument('--color_aug',   default=True,  action='store_false')
 
         #### Training Arguments ####
-        self.parser.add_argument('--model',       default='PS_FCN')
+        self.parser.add_argument('--model',       default='PS_FCN', help='PS_FCN|PS_FCN_CBN')
         self.parser.add_argument('--solver',      default='adam', help='adam|sgd')
         self.parser.add_argument('--milestones',  default=[5, 10, 15, 20, 25], nargs='+', type=int)
         self.parser.add_argument('--init_lr',     default=1e-3, type=float)
@@ -29,8 +30,9 @@ class TrainOpts(BaseOpts):
         self.parser.add_argument('--beta_1',      default=0.9,  type=float, help='adam')
         self.parser.add_argument('--beta_2',      default=0.999,type=float, help='adam')
         self.parser.add_argument('--momentum',    default=0.9,  type=float, help='sgd')
-        self.parser.add_argument('--batch',       default=32,   type=int)
+        self.parser.add_argument('--batch',       default=64,   type=int)
         self.parser.add_argument('--val_batch',   default=8,    type=int)
+        self.parser.add_argument('--mixed_precision', action='store_true')
 
         #### Display Arguments ####
         self.parser.add_argument('--train_disp',  default=20,   type=int)
@@ -41,6 +43,8 @@ class TrainOpts(BaseOpts):
 
         #### Checkpoint Arguments ####
         self.parser.add_argument('--save_intv',  default=1, type=int)
+        self.parser.add_argument('--wandb_key',  default='83a405c84332251cb3fa091cc27cf0c9fc157888', type=str)
+        self.parser.add_argument('--wandb_name', default='PS_FCN_CBN_1', type=str)
 
         #### Loss Arguments ####
         self.parser.add_argument('--normal_loss',default='cos', help='cos|mse')

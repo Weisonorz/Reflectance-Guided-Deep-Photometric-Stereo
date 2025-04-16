@@ -1,0 +1,7 @@
+{"time":"2025-04-16T03:22:55.554365444-04:00","level":"INFO","msg":"stream: starting","core version":"0.19.8","symlink path":"/home/ruoguli/idl_project/wandb/run-20250416_032255-ziw3hsn0/logs/debug-core.log"}
+{"time":"2025-04-16T03:22:55.660046023-04:00","level":"INFO","msg":"created new stream","id":"ziw3hsn0"}
+{"time":"2025-04-16T03:22:55.660065109-04:00","level":"INFO","msg":"stream: started","id":"ziw3hsn0"}
+{"time":"2025-04-16T03:22:55.660098303-04:00","level":"INFO","msg":"writer: Do: started","stream_id":"ziw3hsn0"}
+{"time":"2025-04-16T03:22:55.660105596-04:00","level":"INFO","msg":"sender: started","stream_id":"ziw3hsn0"}
+{"time":"2025-04-16T03:22:55.660118681-04:00","level":"INFO","msg":"handler: started","stream_id":"ziw3hsn0"}
+{"time":"2025-04-16T03:22:55.801417502-04:00","level":"INFO","msg":"Starting system monitor"}

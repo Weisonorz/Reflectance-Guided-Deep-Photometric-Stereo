@@ -1,0 +1,11 @@
+=> Using adam solver for optimization
+=> Using cos for criterion normal
+/data2/datasets/ruoguli/miniconda/envs/torch_env/lib/python3.12/site-packages/torch/optim/lr_scheduler.py:224: UserWarning: Detected call of `lr_scheduler.step()` before `optimizer.step()`. In PyTorch 1.1.0 and later, you should call them in the opposite order: `optimizer.step()` before `lr_scheduler.step()`.  Failure to do this will result in PyTorch skipping the first value of the learning rate schedule. See more details at https://pytorch.org/docs/stable/optim.html#how-to-adjust-learning-rate
+  warnings.warn(
+Traceback (most recent call last):
+  File "/home/ruoguli/idl_project/train_PSFCN.py", line 52, in <module>
+    main(args)
+  File "/home/ruoguli/idl_project/train_PSFCN.py", line 42, in main
+    val_acc = test_utils.test(args, 'val', val_loader, model, log, epoch)
+                                                              ^^^
+NameError: name 'log' is not defined

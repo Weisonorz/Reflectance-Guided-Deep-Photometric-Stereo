@@ -1,0 +1,40 @@
+=> Using adam solver for optimization
+=> Using cos for criterion normal
+---- Start Training Epoch 1: 101 batches ----
+Train:   0%|                                         | 0/101 [00:00<?, ?it/s]/home/ruoguli/idl_project/train_utils.py:18: FutureWarning: `torch.cuda.amp.GradScaler(args...)` is deprecated. Please use `torch.amp.GradScaler('cuda', args...)` instead.
+  scalar = GradScaler(enabled=args.mixed_precision)
+/home/ruoguli/idl_project/train_utils.py:25: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with autocast(enabled=args.mixed_precision):
+Val:   0%|                                            | 0/33 [00:00<?, ?it/s]/home/ruoguli/idl_project/utils/eval_utils.py:12: UserWarning: indexing with dtype torch.uint8 is now deprecated, please use a dtype torch.bool instead. (Triggered internally at /opt/conda/conda-bld/pytorch_1729647329220/work/aten/src/ATen/native/IndexingUtils.h:27.)
+---- Start val Epoch 1: 33 batches ----
+  ang_valid   = angular_map[mask.narrow(1, 0, 1).squeeze(1).byte()]
+Train:   8%|▌      | 8/101 [01:58<19:05, 12.32s/it, loss=0.2889, lr=0.001000]Traceback (most recent call last):
+Best model saved at epoch 1
+Save epoch model at 1
+---- Start Training Epoch 2: 101 batches ----
+  File "/home/ruoguli/idl_project/train_PSFCN.py", line 56, in <module>
+    main(args)
+  File "/home/ruoguli/idl_project/train_PSFCN.py", line 38, in main
+    train_loss = train_utils.train(args, train_loader, model, criterion, optimizer, epoch)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ruoguli/idl_project/train_utils.py", line 19, in train
+    for i, sample in enumerate(loader):
+                     ^^^^^^^^^^^^^^^^^
+  File "/data2/datasets/ruoguli/miniconda/envs/torch_env/lib/python3.12/site-packages/torch/utils/data/dataloader.py", line 701, in __next__
+    data = self._next_data()
+           ^^^^^^^^^^^^^^^^^
+  File "/data2/datasets/ruoguli/miniconda/envs/torch_env/lib/python3.12/site-packages/torch/utils/data/dataloader.py", line 1448, in _next_data
+    idx, data = self._get_data()
+                ^^^^^^^^^^^^^^^^
+  File "/data2/datasets/ruoguli/miniconda/envs/torch_env/lib/python3.12/site-packages/torch/utils/data/dataloader.py", line 1402, in _get_data
+    success, data = self._try_get_data()
+                    ^^^^^^^^^^^^^^^^^^^^
+  File "/data2/datasets/ruoguli/miniconda/envs/torch_env/lib/python3.12/site-packages/torch/utils/data/dataloader.py", line 1243, in _try_get_data
+    data = self._data_queue.get(timeout=timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/data2/datasets/ruoguli/miniconda/envs/torch_env/lib/python3.12/queue.py", line 180, in get
+    self.not_empty.wait(remaining)
+  File "/data2/datasets/ruoguli/miniconda/envs/torch_env/lib/python3.12/threading.py", line 359, in wait
+    gotit = waiter.acquire(True, timeout)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+KeyboardInterrupt

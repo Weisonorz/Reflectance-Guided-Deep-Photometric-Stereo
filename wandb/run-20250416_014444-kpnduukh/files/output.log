@@ -1,0 +1,15 @@
+=> Using adam solver for optimization
+=> Using cos for criterion normal
+/data2/datasets/ruoguli/miniconda/envs/torch_env/lib/python3.12/site-packages/torch/optim/lr_scheduler.py:224: UserWarning: Detected call of `lr_scheduler.step()` before `optimizer.step()`. In PyTorch 1.1.0 and later, you should call them in the opposite order: `optimizer.step()` before `lr_scheduler.step()`.  Failure to do this will result in PyTorch skipping the first value of the learning rate schedule. See more details at https://pytorch.org/docs/stable/optim.html#how-to-adjust-learning-rate
+  warnings.warn(
+---- Start Training Epoch 1: 802 batches ----
+Train:   0%|                                         | 0/802 [00:00<?, ?it/s]Traceback (most recent call last):
+  File "/home/ruoguli/idl_project/train_PSFCN.py", line 51, in <module>
+    main(args)
+  File "/home/ruoguli/idl_project/train_PSFCN.py", line 39, in main
+    train_loss = train_utils.train(args, train_loader, model, criterion, optimizer, epoch)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ruoguli/idl_project/train_utils.py", line 24, in train
+    total_loss += loss['N_loss'].item()
+                  ^^^^^^^^^^^^^^^^^^^
+AttributeError: 'float' object has no attribute 'item'
