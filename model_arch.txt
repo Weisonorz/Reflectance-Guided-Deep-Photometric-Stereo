@@ -1,87 +1,40 @@
-PS_FCN_CBN(
+PS_FCN_FiLM(
   (brdf_embed_block): BRDF_EmbedBlock(
-    (embed_transform): Linear(in_features=14, out_features=512, bias=True)
+    (embed_transform): Sequential(
+      (0): Linear(in_features=14, out_features=512, bias=True)
+      (1): LeakyReLU(negative_slope=0.1)
+    )
   )
-  (extractor): FeatExtractor_CBN(
-    (conv1): Conditional_Conv(
-      (regular_conv): Conv2d(6, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
-      (cBatchNorm): CBN(
-        (fc_gamma): Sequential(
-          (0): Linear(in_features=512, out_features=512, bias=True)
-          (1): ReLU(inplace=True)
-          (2): Linear(in_features=512, out_features=64, bias=True)
-        )
-        (fc_beta): Sequential(
-          (0): Linear(in_features=512, out_features=512, bias=True)
-          (1): ReLU(inplace=True)
-          (2): Linear(in_features=512, out_features=64, bias=True)
-        )
-      )
-      (activation): LeakyReLU(negative_slope=0.1, inplace=True)
+  (extractor): FeatExtractor(
+    (conv1): FiLMConv(
+      (conv): Conv2d(6, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (relu): LeakyReLU(negative_slope=0.1, inplace=True)
+      (FiLMGnerator): Linear(in_features=512, out_features=128, bias=True)
+      (FiLMBlock): FiLMBlock()
     )
-    (conv2): Conditional_Conv(
-      (regular_conv): Conv2d(64, 128, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1))
-      (cBatchNorm): CBN(
-        (fc_gamma): Sequential(
-          (0): Linear(in_features=512, out_features=512, bias=True)
-          (1): ReLU(inplace=True)
-          (2): Linear(in_features=512, out_features=128, bias=True)
-        )
-        (fc_beta): Sequential(
-          (0): Linear(in_features=512, out_features=512, bias=True)
-          (1): ReLU(inplace=True)
-          (2): Linear(in_features=512, out_features=128, bias=True)
-        )
-      )
-      (activation): LeakyReLU(negative_slope=0.1, inplace=True)
+    (conv2): FiLMConv(
+      (conv): Conv2d(64, 128, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1))
+      (relu): LeakyReLU(negative_slope=0.1, inplace=True)
+      (FiLMGnerator): Linear(in_features=512, out_features=256, bias=True)
+      (FiLMBlock): FiLMBlock()
     )
-    (conv3): Conditional_Conv(
-      (regular_conv): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
-      (cBatchNorm): CBN(
-        (fc_gamma): Sequential(
-          (0): Linear(in_features=512, out_features=512, bias=True)
-          (1): ReLU(inplace=True)
-          (2): Linear(in_features=512, out_features=128, bias=True)
-        )
-        (fc_beta): Sequential(
-          (0): Linear(in_features=512, out_features=512, bias=True)
-          (1): ReLU(inplace=True)
-          (2): Linear(in_features=512, out_features=128, bias=True)
-        )
-      )
-      (activation): LeakyReLU(negative_slope=0.1, inplace=True)
+    (conv3): FiLMConv(
+      (conv): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (relu): LeakyReLU(negative_slope=0.1, inplace=True)
+      (FiLMGnerator): Linear(in_features=512, out_features=256, bias=True)
+      (FiLMBlock): FiLMBlock()
     )
-    (conv4): Conditional_Conv(
-      (regular_conv): Conv2d(128, 256, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1))
-      (cBatchNorm): CBN(
-        (fc_gamma): Sequential(
-          (0): Linear(in_features=512, out_features=512, bias=True)
-          (1): ReLU(inplace=True)
-          (2): Linear(in_features=512, out_features=256, bias=True)
-        )
-        (fc_beta): Sequential(
-          (0): Linear(in_features=512, out_features=512, bias=True)
-          (1): ReLU(inplace=True)
-          (2): Linear(in_features=512, out_features=256, bias=True)
-        )
-      )
-      (activation): LeakyReLU(negative_slope=0.1, inplace=True)
+    (conv4): FiLMConv(
+      (conv): Conv2d(128, 256, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1))
+      (relu): LeakyReLU(negative_slope=0.1, inplace=True)
+      (FiLMGnerator): Linear(in_features=512, out_features=512, bias=True)
+      (FiLMBlock): FiLMBlock()
     )
-    (conv5): Conditional_Conv(
-      (regular_conv): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
-      (cBatchNorm): CBN(
-        (fc_gamma): Sequential(
-          (0): Linear(in_features=512, out_features=512, bias=True)
-          (1): ReLU(inplace=True)
-          (2): Linear(in_features=512, out_features=256, bias=True)
-        )
-        (fc_beta): Sequential(
-          (0): Linear(in_features=512, out_features=512, bias=True)
-          (1): ReLU(inplace=True)
-          (2): Linear(in_features=512, out_features=256, bias=True)
-        )
-      )
-      (activation): LeakyReLU(negative_slope=0.1, inplace=True)
+    (conv5): FiLMConv(
+      (conv): Conv2d(256, 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (relu): LeakyReLU(negative_slope=0.1, inplace=True)
+      (FiLMGnerator): Linear(in_features=512, out_features=512, bias=True)
+      (FiLMBlock): FiLMBlock()
     )
     (conv6): Sequential(
       (0): ConvTranspose2d(256, 128, kernel_size=(4, 4), stride=(2, 2), padding=(1, 1), bias=False)
@@ -92,7 +45,7 @@ PS_FCN_CBN(
       (1): LeakyReLU(negative_slope=0.1, inplace=True)
     )
   )
-  (regressor): Regressor_CBN(
+  (regressor): Regressor(
     (deconv1): Sequential(
       (0): Conv2d(128, 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
       (1): LeakyReLU(negative_slope=0.1, inplace=True)

@@ -1,0 +1,84 @@
+--- Loading Checkpoint: /data2/datasets/ruoguli/idl_project_datas/PS-FCN_B_S_32.pth.tar ---
+--- Target Model: PS_FCN_FiLM ---
+--------------------------------------------------
+Checkpoint loaded successfully from: /data2/datasets/ruoguli/idl_project_datas/PS-FCN_B_S_32.pth.tar
+
+--- Processing Pretrained Parameters ---
+
+--- Loading into Model ---
+model.load_state_dict(model_dict) executed.
+
+==================================================
+      State Dict Loading Summary
+==================================================
+
+--- (12) Keys Loaded Successfully ---
+extractor.conv2.0.weight -> extractor.conv2.conv.weight (Shape: (128, 64, 3, 3))
+extractor.conv3.0.weight -> extractor.conv3.conv.weight (Shape: (128, 128, 3, 3))
+extractor.conv4.0.weight -> extractor.conv4.conv.weight (Shape: (256, 128, 3, 3))
+extractor.conv5.0.weight -> extractor.conv5.conv.weight (Shape: (256, 256, 3, 3))
+extractor.conv6.0.weight -> extractor.conv6.0.weight (Direct Match, Shape: (256, 128, 4, 4))
+extractor.conv7.0.weight -> extractor.conv7.0.weight (Direct Match, Shape: (128, 128, 3, 3))
+regressor.deconv1.0.bias -> regressor.deconv1.0.bias (Direct Match, Shape: (128,))
+regressor.deconv1.0.weight -> regressor.deconv1.0.weight (Direct Match, Shape: (128, 128, 3, 3))
+regressor.deconv2.0.bias -> regressor.deconv2.0.bias (Direct Match, Shape: (128,))
+regressor.deconv2.0.weight -> regressor.deconv2.0.weight (Direct Match, Shape: (128, 128, 3, 3))
+regressor.deconv3.0.weight -> regressor.deconv3.0.weight (Direct Match, Shape: (128, 64, 4, 4))
+regressor.est_normal.0.weight -> regressor.est_normal.0.weight (Direct Match, Shape: (3, 64, 3, 3))
+
+--- (1) Pretrained Keys Skipped (Shape Mismatch) ---
+extractor.conv1.0.weight (Shape: (64, 6, 3, 3)) vs extractor.conv1.conv.weight (Shape: (64, 0, 3, 3))
+
+--- (6) Pretrained Keys Skipped (No Target Layer/Param) ---
+extractor.conv1.0.bias (Target key extractor.conv1.conv.bias not found in new model)
+extractor.conv2.0.bias (Target key extractor.conv2.conv.bias not found in new model)
+extractor.conv3.0.bias (Target key extractor.conv3.conv.bias not found in new model)
+extractor.conv4.0.bias (Target key extractor.conv4.conv.bias not found in new model)
+extractor.conv5.0.bias (Target key extractor.conv5.conv.bias not found in new model)
+extractor.conv7.0.bias (No matching key or rule in new model)
+
+--- (43) Keys in New Model NOT Loaded from Checkpoint (Initialized Instead) ---
+brdf_embed_block.embed_transform.0.bias
+brdf_embed_block.embed_transform.0.weight
+extractor.conv1.FiLMGnerator.bias
+extractor.conv1.FiLMGnerator.weight
+extractor.conv1.bn.bias
+extractor.conv1.bn.num_batches_tracked
+extractor.conv1.bn.running_mean
+extractor.conv1.bn.running_var
+extractor.conv1.bn.weight
+extractor.conv1.conv.weight
+extractor.conv2.FiLMGnerator.bias
+extractor.conv2.FiLMGnerator.weight
+extractor.conv2.bn.bias
+extractor.conv2.bn.num_batches_tracked
+extractor.conv2.bn.running_mean
+extractor.conv2.bn.running_var
+extractor.conv2.bn.weight
+extractor.conv3.FiLMGnerator.bias
+extractor.conv3.FiLMGnerator.weight
+extractor.conv3.bn.bias
+extractor.conv3.bn.num_batches_tracked
+extractor.conv3.bn.running_mean
+extractor.conv3.bn.running_var
+extractor.conv3.bn.weight
+extractor.conv4.FiLMGnerator.bias
+extractor.conv4.FiLMGnerator.weight
+extractor.conv4.bn.bias
+extractor.conv4.bn.num_batches_tracked
+extractor.conv4.bn.running_mean
+extractor.conv4.bn.running_var
+extractor.conv4.bn.weight
+extractor.conv5.FiLMGnerator.bias
+extractor.conv5.FiLMGnerator.weight
+extractor.conv5.bn.bias
+extractor.conv5.bn.num_batches_tracked
+extractor.conv5.bn.running_mean
+extractor.conv5.bn.running_var
+extractor.conv5.bn.weight
+extractor.conv7.1.bias
+extractor.conv7.1.num_batches_tracked
+extractor.conv7.1.running_mean
+extractor.conv7.1.running_var
+extractor.conv7.1.weight
+==================================================

@@ -20,7 +20,7 @@ class BaseOpts(object):
         self.parser.add_argument('--train_img_num', default=32, type=int) # for data normalization
         self.parser.add_argument('--in_img_num', default=32,    type=int)
         self.parser.add_argument('--start_epoch',default=1,     type=int)
-        self.parser.add_argument('--epochs',     default=30,    type=int)
+        self.parser.add_argument('--epochs',     default=100,    type=int)
         self.parser.add_argument('--resume',     default=None)
         self.parser.add_argument('--retrain',    default=None)	
         # self.parser.add_argument('--compile',    action='store_true', help='use torch.compile')  doesn't work

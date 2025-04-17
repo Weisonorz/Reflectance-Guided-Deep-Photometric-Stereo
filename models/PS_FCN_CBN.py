@@ -11,7 +11,6 @@ from . import model_utils
 from . import cbn
 
 class BRDF_EmbedBlock(nn.Module):
-    # LSTM*
     def __init__(self, brdf_input_size, brdf_embed_size):
         super(BRDF_EmbedBlock, self).__init__()
         self.brdf_input_size = brdf_input_size

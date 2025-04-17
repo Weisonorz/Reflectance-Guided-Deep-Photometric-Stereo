@@ -1,0 +1,9 @@
+=> Using adam solver for optimization
+=> Using cos for criterion normal
+---- Start Training Epoch 1: 401 batches ----
+Train:   0%|                                  | 0/401 [00:00<?, ?it/s]/home/ruoguli/idl_project/train_utils.py:18: FutureWarning: `torch.cuda.amp.GradScaler(args...)` is deprecated. Please use `torch.amp.GradScaler('cuda', args...)` instead.
+  scalar = GradScaler(enabled=args.mixed_precision)
+/home/ruoguli/idl_project/train_utils.py:25: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with autocast(enabled=args.mixed_precision):
+Train:   1%| | 4/401 [00:16<21:44,  3.29s/it, loss=0.2645, lr=0.000100[34m[1mwandb[0m: [33mWARNING[0m Fatal error while uploading data. Some run data will not be synced, but it will still be written to disk. Use `wandb sync` at the end of the run to try uploading.
+Train:   1%| | 6/401 [00:23<20:59,  3.19s/it, loss=0.2723, lr=0.000100

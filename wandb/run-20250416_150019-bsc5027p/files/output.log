@@ -1,0 +1,39 @@
+=> Using adam solver for optimization
+=> Using cos for criterion normal
+/data2/datasets/ruoguli/miniconda/envs/torch_env/lib/python3.12/site-packages/torch/optim/lr_scheduler.py:224: UserWarning: Detected call of `lr_scheduler.step()` before `optimizer.step()`. In PyTorch 1.1.0 and later, you should call them in the opposite order: `optimizer.step()` before `lr_scheduler.step()`.  Failure to do this will result in PyTorch skipping the first value of the learning rate schedule. See more details at https://pytorch.org/docs/stable/optim.html#how-to-adjust-learning-rate
+  warnings.warn(
+---- Start val Epoch 1: 33 batches ----
+Val:   0%|                                     | 0/33 [00:00<?, ?it/s]Traceback (most recent call last):
+  File "/home/ruoguli/idl_project/train_PSFCN.py", line 56, in <module>
+    main(args)
+  File "/home/ruoguli/idl_project/train_PSFCN.py", line 40, in main
+    val_acc = test_utils.test(args, 'val', val_loader, model, epoch)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ruoguli/idl_project/test_utils.py", line 31, in test
+    out_var = model(input); timer.updateTime('Forward')
+              ^^^^^^^^^^^^
+  File "/data2/datasets/ruoguli/miniconda/envs/torch_env/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/data2/datasets/ruoguli/miniconda/envs/torch_env/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ruoguli/idl_project/models/PS_FCN_FiLM.py", line 98, in forward
+    feat, shape = self.extractor(net_in)
+                  ^^^^^^^^^^^^^^^^^^^^^^
+  File "/data2/datasets/ruoguli/miniconda/envs/torch_env/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/data2/datasets/ruoguli/miniconda/envs/torch_env/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ruoguli/idl_project/models/PS_FCN_FiLM.py", line 35, in forward
+    out = self.conv1(x)
+          ^^^^^^^^^^^^^
+  File "/data2/datasets/ruoguli/miniconda/envs/torch_env/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1736, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/data2/datasets/ruoguli/miniconda/envs/torch_env/lib/python3.12/site-packages/torch/nn/modules/module.py", line 1747, in _call_impl
+    return forward_call(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+TypeError: FiLMConv.forward() missing 1 required positional argument: 'brdf_emb_vector'

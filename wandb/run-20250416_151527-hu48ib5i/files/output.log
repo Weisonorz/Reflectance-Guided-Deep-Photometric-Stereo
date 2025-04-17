@@ -1,0 +1,91 @@
+=> Using adam solver for optimization
+=> Using cos for criterion normal
+---- Start Training Epoch 1: 401 batches ----
+Train:   0%|          | 0/401 [00:00<?, ?it/s]/home/ruoguli/idl_project/train_utils.py:18: FutureWarning: `torch.cuda.amp.GradScaler(args...)` is deprecated. Please use `torch.amp.GradScaler('cuda', args...)` instead.
+  scalar = GradScaler(enabled=args.mixed_precision)
+/home/ruoguli/idl_project/train_utils.py:25: FutureWarning: `torch.cuda.amp.autocast(args...)` is deprecated. Please use `torch.amp.autocast('cuda', args...)` instead.
+  with autocast(enabled=args.mixed_precision):
+Val:   0%|          | 0/33 [00:00<?, ?it/s]/home/ruoguli/idl_project/utils/eval_utils.py:12: UserWarning: indexing with dtype torch.uint8 is now deprecated, please use a dtype torch.bool instead. (Triggered internally at /opt/conda/conda-bld/pytorch_1729647329220/work/aten/src/ATen/native/IndexingUtils.h:27.)
+---- Start val Epoch 1: 33 batches ----
+  ang_valid   = angular_map[mask.narrow(1, 0, 1).squeeze(1).byte()]
+                                                                                  
+Save epoch model at 1
+Epoch 1: train_loss 0.2781, val_n_err 5.7200
+---- Start Training Epoch 2: 401 batches ----
+---- Start val Epoch 2: 33 batches ----
+Save epoch model at 2
+Epoch 2: train_loss 0.2729, val_n_err 5.0874
+---- Start Training Epoch 3: 401 batches ----
+---- Start val Epoch 3: 33 batches ----
+Save epoch model at 3
+Epoch 3: train_loss 0.2735, val_n_err 5.1155
+---- Start Training Epoch 4: 401 batches ----
+---- Start val Epoch 4: 33 batches ----
+Save epoch model at 4
+Epoch 4: train_loss 0.2738, val_n_err 5.2531
+---- Start Training Epoch 5: 401 batches ----
+---- Start val Epoch 5: 33 batches ----
+Best model saved at epoch 5
+Save epoch model at 5
+Epoch 5: train_loss 0.2740, val_n_err 4.7660
+---- Start Training Epoch 6: 401 batches ----
+---- Start val Epoch 6: 33 batches ----
+Save epoch model at 6
+Epoch 6: train_loss 0.2737, val_n_err 5.1990
+---- Start Training Epoch 7: 401 batches ----
+---- Start val Epoch 7: 33 batches ----
+Save epoch model at 7
+Epoch 7: train_loss 0.2731, val_n_err 5.0296
+---- Start Training Epoch 8: 401 batches ----
+---- Start val Epoch 8: 33 batches ----
+Best model saved at epoch 8
+Save epoch model at 8
+Epoch 8: train_loss 0.2753, val_n_err 4.7134
+---- Start Training Epoch 9: 401 batches ----
+---- Start val Epoch 9: 33 batches ----
+Save epoch model at 9
+Epoch 9: train_loss 0.2721, val_n_err 4.7737
+---- Start Training Epoch 10: 401 batches ----
+---- Start val Epoch 10: 33 batches ----
+Save epoch model at 10
+Epoch 10: train_loss 0.2722, val_n_err 4.9196
+---- Start Training Epoch 11: 401 batches ----
+---- Start val Epoch 11: 33 batches ----
+Save epoch model at 11
+Epoch 11: train_loss 0.2723, val_n_err 4.7898
+---- Start Training Epoch 12: 401 batches ----
+---- Start val Epoch 12: 33 batches ----
+Best model saved at epoch 12
+Save epoch model at 12
+Epoch 12: train_loss 0.2717, val_n_err 4.5955
+---- Start Training Epoch 13: 401 batches ----
+---- Start val Epoch 13: 33 batches ----
+Save epoch model at 13
+Epoch 13: train_loss 0.2727, val_n_err 4.9371
+---- Start Training Epoch 14: 401 batches ----
+---- Start val Epoch 14: 33 batches ----
+Save epoch model at 14
+Epoch 14: train_loss 0.2739, val_n_err 4.6822
+---- Start Training Epoch 15: 401 batches ----
+---- Start val Epoch 15: 33 batches ----
+Save epoch model at 15
+Epoch 15: train_loss 0.2730, val_n_err 4.6665
+---- Start Training Epoch 16: 401 batches ----
+---- Start val Epoch 16: 33 batches ----
+Save epoch model at 16
+Epoch 16: train_loss 0.2702, val_n_err 4.6833
+---- Start Training Epoch 17: 401 batches ----
+---- Start val Epoch 17: 33 batches ----
+Best model saved at epoch 17
+Save epoch model at 17
+Epoch 17: train_loss 0.2729, val_n_err 4.5275
+---- Start Training Epoch 18: 401 batches ----
+---- Start val Epoch 18: 33 batches ----
+Best model saved at epoch 18
+Save epoch model at 18
+Epoch 18: train_loss 0.2714, val_n_err 4.5252
+---- Start Training Epoch 19: 401 batches ----
+---- Start val Epoch 19: 33 batches ----
+Save epoch model at 19
+Epoch 19: train_loss 0.2725, val_n_err 4.5843
+---- Start Training Epoch 20: 401 batches ----

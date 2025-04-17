@@ -1,0 +1,16 @@
+{"time":"2025-04-16T15:11:23.039073932-04:00","level":"INFO","msg":"stream: starting","core version":"0.19.8","symlink path":"/home/ruoguli/idl_project/wandb/run-20250416_151123-bj9du0nu/logs/debug-core.log"}
+{"time":"2025-04-16T15:11:23.145957705-04:00","level":"INFO","msg":"created new stream","id":"bj9du0nu"}
+{"time":"2025-04-16T15:11:23.145981831-04:00","level":"INFO","msg":"stream: started","id":"bj9du0nu"}
+{"time":"2025-04-16T15:11:23.146020715-04:00","level":"INFO","msg":"writer: Do: started","stream_id":"bj9du0nu"}
+{"time":"2025-04-16T15:11:23.146450594-04:00","level":"INFO","msg":"handler: started","stream_id":"bj9du0nu"}
+{"time":"2025-04-16T15:11:23.146465041-04:00","level":"INFO","msg":"sender: started","stream_id":"bj9du0nu"}
+{"time":"2025-04-16T15:11:23.318573134-04:00","level":"INFO","msg":"Starting system monitor"}
+{"time":"2025-04-16T15:11:38.677799044-04:00","level":"ERROR","msg":"HTTP error","status":404,"method":"POST","url":"https://api.wandb.ai/files/leolrg-carnegie-mellon-university/idl_project/bj9du0nu/file_stream"}
+{"time":"2025-04-16T15:11:38.678214646-04:00","level":"ERROR+4","msg":"filestream: fatal error: filestream: failed to upload: 404 Not Found path=files/leolrg-carnegie-mellon-university/idl_project/bj9du0nu/file_stream: {\"error\":\"run idl_project/bj9du0nu not found while streaming file\"}"}
+{"time":"2025-04-16T15:11:53.743234152-04:00","level":"INFO","msg":"api: retrying HTTP error","status":409,"url":"https://api.wandb.ai/graphql","body":"{\"errors\":[{\"message\":\"run bj9du0nu was previously created and deleted; try a new run name\",\"path\":[\"upsertBucket\"]}],\"data\":{\"upsertBucket\":null}}"}
+{"time":"2025-04-16T15:11:56.042857853-04:00","level":"INFO","msg":"api: retrying HTTP error","status":409,"url":"https://api.wandb.ai/graphql","body":"{\"errors\":[{\"message\":\"run bj9du0nu was previously created and deleted; try a new run name\",\"path\":[\"upsertBucket\"]}],\"data\":{\"upsertBucket\":null}}"}
+{"time":"2025-04-16T15:12:00.213002854-04:00","level":"INFO","msg":"api: retrying HTTP error","status":409,"url":"https://api.wandb.ai/graphql","body":"{\"errors\":[{\"message\":\"run bj9du0nu was previously created and deleted; try a new run name\",\"path\":[\"upsertBucket\"]}],\"data\":{\"upsertBucket\":null}}"}
+{"time":"2025-04-16T15:12:08.533458426-04:00","level":"INFO","msg":"stream: closing","id":"bj9du0nu"}
+{"time":"2025-04-16T15:12:08.53349724-04:00","level":"INFO","msg":"Stopping system monitor"}
+{"time":"2025-04-16T15:12:08.533870661-04:00","level":"INFO","msg":"Stopped system monitor"}
+{"time":"2025-04-16T15:12:09.698939946-04:00","level":"INFO","msg":"api: retrying HTTP error","status":409,"url":"https://api.wandb.ai/graphql","body":"{\"errors\":[{\"message\":\"run bj9du0nu was previously created and deleted; try a new run name\",\"path\":[\"upsertBucket\"]}],\"data\":{\"upsertBucket\":null}}"}

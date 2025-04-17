@@ -25,7 +25,7 @@ def load_wandb(args, model):
 
 def main(args):
     train_loader, val_loader = custom_data_loader.customDataloader(args)
-    best_val_n_err = 100. 
+    best_val_n_err = 4.89
     model = custom_model.buildModel(args)
     if args.wandb_key is not None:
         load_wandb(args, model)
@@ -41,9 +41,9 @@ def main(args):
         if val_acc < best_val_n_err:
             best_val_n_err = val_acc
             print('Best model saved at epoch %d' % (epoch))
-            model_utils.save_checkpoint(args, model, optimizer, scheduler, val_acc, epoch, f'{args.save_root}/best_model.pth')
+            model_utils.save_checkpoint(args, model, optimizer, scheduler, val_acc, epoch, f'{args.save_root}/{args.wandb_name}/best_model.pth')
         print("Save epoch model at %d" % (epoch))
-        model_utils.save_checkpoint(args, model, optimizer, scheduler, val_acc, epoch, f'{args.save_root}/epoch_model.pth')
+        model_utils.save_checkpoint(args, model, optimizer, scheduler, val_acc, epoch, f'{args.save_root}/{args.wandb_name}/epoch_model.pth')
         
         wandb.log({
             "train_loss": train_loss,

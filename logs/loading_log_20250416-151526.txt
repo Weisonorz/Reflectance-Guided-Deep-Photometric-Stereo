@@ -1,0 +1,53 @@
+--- Loading Checkpoint: /data2/datasets/ruoguli/idl_project_datas/PS-FCN_B_S_32.pth.tar ---
+--- Target Model: PS_FCN_FiLM ---
+--------------------------------------------------
+Checkpoint loaded successfully from: /data2/datasets/ruoguli/idl_project_datas/PS-FCN_B_S_32.pth.tar
+
+--- Processing Pretrained Parameters ---
+
+--- Loading into Model ---
+model.load_state_dict(model_dict) executed.
+
+==================================================
+      State Dict Loading Summary
+==================================================
+
+--- (19) Keys Loaded Successfully ---
+extractor.conv1.0.bias -> extractor.conv1.conv.bias (Shape: (64,))
+extractor.conv1.0.weight -> extractor.conv1.conv.weight (Shape: (64, 6, 3, 3))
+extractor.conv2.0.bias -> extractor.conv2.conv.bias (Shape: (128,))
+extractor.conv2.0.weight -> extractor.conv2.conv.weight (Shape: (128, 64, 3, 3))
+extractor.conv3.0.bias -> extractor.conv3.conv.bias (Shape: (128,))
+extractor.conv3.0.weight -> extractor.conv3.conv.weight (Shape: (128, 128, 3, 3))
+extractor.conv4.0.bias -> extractor.conv4.conv.bias (Shape: (256,))
+extractor.conv4.0.weight -> extractor.conv4.conv.weight (Shape: (256, 128, 3, 3))
+extractor.conv5.0.bias -> extractor.conv5.conv.bias (Shape: (256,))
+extractor.conv5.0.weight -> extractor.conv5.conv.weight (Shape: (256, 256, 3, 3))
+extractor.conv6.0.weight -> extractor.conv6.0.weight (Direct Match, Shape: (256, 128, 4, 4))
+extractor.conv7.0.bias -> extractor.conv7.0.bias (Direct Match, Shape: (128,))
+extractor.conv7.0.weight -> extractor.conv7.0.weight (Direct Match, Shape: (128, 128, 3, 3))
+regressor.deconv1.0.bias -> regressor.deconv1.0.bias (Direct Match, Shape: (128,))
+regressor.deconv1.0.weight -> regressor.deconv1.0.weight (Direct Match, Shape: (128, 128, 3, 3))
+regressor.deconv2.0.bias -> regressor.deconv2.0.bias (Direct Match, Shape: (128,))
+regressor.deconv2.0.weight -> regressor.deconv2.0.weight (Direct Match, Shape: (128, 128, 3, 3))
+regressor.deconv3.0.weight -> regressor.deconv3.0.weight (Direct Match, Shape: (128, 64, 4, 4))
+regressor.est_normal.0.weight -> regressor.est_normal.0.weight (Direct Match, Shape: (3, 64, 3, 3))
+
+--- (0) Pretrained Keys Skipped (Shape Mismatch) ---
+
+--- (0) Pretrained Keys Skipped (No Target Layer/Param) ---
+
+--- (12) Keys in New Model NOT Loaded from Checkpoint (Initialized Instead) ---
+brdf_embed_block.embed_transform.0.bias
+brdf_embed_block.embed_transform.0.weight
+extractor.conv1.FiLMGnerator.bias
+extractor.conv1.FiLMGnerator.weight
+extractor.conv2.FiLMGnerator.bias
+extractor.conv2.FiLMGnerator.weight
+extractor.conv3.FiLMGnerator.bias
+extractor.conv3.FiLMGnerator.weight
+extractor.conv4.FiLMGnerator.bias
+extractor.conv4.FiLMGnerator.weight
+extractor.conv5.FiLMGnerator.bias
+extractor.conv5.FiLMGnerator.weight
+==================================================

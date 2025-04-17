@@ -1,4 +1,4 @@
-from . import PS_FCN_feature1
+from . import PS_FCN_CBN
 import torch
 # from torchsummary import summary
 from torchinfo import summary
@@ -17,7 +17,7 @@ light_input = torch.rand(batch_size, image_channel*10, height, width)
 brdf = torch.rand(14,)
 
 # Initialize the model
-model = PS_FCN_feature1.PS_FCN_CBN(batch_size, fuse_type='max', batchNorm=True, c_in=image_channel).to(device)
+model = PS_FCN_CBN.PS_FCN_CBN(batch_size, fuse_type='max', batchNorm=True, c_in=image_channel).to(device)
 
 # Model summary
 summary(model, 

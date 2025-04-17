@@ -128,3 +128,15 @@ Epoch 26: train_loss 0.2736, val_n_err 5.1264
 Save epoch model at 27
 Epoch 27: train_loss 0.2723, val_n_err 5.1561
 ---- Start Training Epoch 28: 401 batches ----
+---- Start val Epoch 28: 33 batches ----
+Save epoch model at 28
+Epoch 28: train_loss 0.2762, val_n_err 5.2426
+---- Start Training Epoch 29: 401 batches ----
+---- Start val Epoch 29: 33 batches ----
+Save epoch model at 29
+Epoch 29: train_loss 0.2724, val_n_err 5.2668
+---- Start Training Epoch 30: 401 batches ----
+---- Start val Epoch 30: 33 batches ----
+Best model saved at epoch 30
+Save epoch model at 30
+Epoch 30: train_loss 0.2742, val_n_err 4.8950

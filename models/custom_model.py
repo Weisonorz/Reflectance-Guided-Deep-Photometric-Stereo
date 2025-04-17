@@ -12,10 +12,12 @@ def buildModel(args):
     #     from models.PS_FCN_run import PS_FCN
     #     model = PS_FCN(args.fuse_type, args.use_BN, in_c, other)
     elif args.model == 'PS_FCN_CBN':
-        from models.PS_FCN_feature1 import PS_FCN_CBN
+        from models.PS_FCN_CBN import PS_FCN_CBN
         model = PS_FCN_CBN(fuse_type=args.fuse_type, batchNorm= args.use_BN, 
                            c_in=in_c, other=other)
-        pass
+    elif args.model == 'PS_FCN_FiLM':
+        from models.PS_FCN_FiLM import PS_FCN_FiLM
+        model = PS_FCN_FiLM(args.fuse_type, args.use_BN, in_c)
     else:
         raise Exception("=> Unknown Model '{}'".format(args.model))
     
@@ -26,6 +28,9 @@ def buildModel(args):
         if args.model == 'PS_FCN_CBN':
             print("=> using pre-trained model %s" % (args.retrain))
             model_utils.loadCheckpoint_to_PSFCN_CBN_debug(args.retrain, model, cuda=args.cuda)
+        elif args.model == 'PS_FCN_FiLM':
+            print("=> using pre-trained model %s" % (args.retrain))
+            model_utils.loadCheckpoint_to_PSFCN_FiLM_debug(args.retrain, model, cuda=args.cuda)
         else:
             print("=> using pre-trained model %s" % (args.retrain))
             model_utils.loadCheckpoint(args.retrain, model, cuda=args.cuda)

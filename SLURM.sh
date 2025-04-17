@@ -18,4 +18,4 @@
 
 source /data2/datasets/ruoguli/miniconda/etc/profile.d/conda.sh
 conda activate torch_env
-python train_PSFCN.py --in_img_num 32 --dataset PS_Blobby_BRDF_Dataset --model PS_FCN_CBN --retrain /data2/datasets/ruoguli/idl_project_datas/PS-FCN_B_S_32.pth.tar 
+python train_PSFCN.py --in_img_num 32 --dataset PS_Blobby_BRDF_Dataset --model PS_FCN_FiLM --wandb_name PS_FCN_FiLM_1 --retrain /data2/datasets/ruoguli/idl_project_datas/PS-FCN_B_S_32.pth.tar  --epoch 50
